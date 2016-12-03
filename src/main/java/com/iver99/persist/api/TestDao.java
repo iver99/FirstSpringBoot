@@ -1,4 +1,4 @@
-package com.iver99.rest;
+package com.iver99.persist.api;
 
 import com.iver99.entity.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
