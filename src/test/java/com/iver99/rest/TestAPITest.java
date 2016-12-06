@@ -1,5 +1,6 @@
 package com.iver99.rest;
 
+import com.iver99.config.Application;
 import com.iver99.persist.api.TestDao;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by chehao on 2016/12/5.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = TestAPI.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @WebIntegrationTest("server.port:0")
 @TransactionConfiguration(defaultRollback = true)
 @Transactional

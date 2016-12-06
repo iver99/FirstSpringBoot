@@ -21,11 +21,7 @@ import javax.persistence.EntityNotFoundException;
  * Created by chehao on 2016/12/2.
  */
 @RestController
-@SpringBootApplication
 @RequestMapping("/test")
-@ComponentScan("com.iver99.*")
-@EnableJpaRepositories("com.iver99.*")
-@EntityScan("com.iver99.*")
 public class TestAPI {
 
     private final Logger logger= LoggerFactory.getLogger(TestAPI.class);
@@ -109,9 +105,9 @@ public class TestAPI {
         return ResponseEntity.notFound();
     }
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         SpringApplication.run(TestAPI.class, args);
-    }
+    }*/
 
 
 }
