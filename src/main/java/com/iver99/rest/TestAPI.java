@@ -3,6 +3,8 @@ package com.iver99.rest;
 import com.iver99.bean.TestBean;
 import com.iver99.entity.Test;
 import com.iver99.persist.api.TestDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -26,12 +28,15 @@ import javax.persistence.EntityNotFoundException;
 @EntityScan("com.iver99.*")
 public class TestAPI {
 
+    private final Logger logger= LoggerFactory.getLogger(TestAPI.class);
     @Autowired
     private TestDao testDao;
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     @ResponseBody
     public Object get(@PathVariable Long id) {
+
+        logger.info("Service to Call [GET] test for id {}",id);
         try{
             Test t = testDao.getOne(id);
             if (t != null) {
@@ -49,6 +54,7 @@ public class TestAPI {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public Object create(TestBean bean){
+        logger.info("Service to Call [POST] test");
         if(bean!=null){
             Test t=new Test();
             BeanUtils.copyProperties(bean,t);
@@ -61,6 +67,7 @@ public class TestAPI {
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
     public Object update(TestBean bean){
+        logger.info("Service to Call [PUT] test");
         try {
             if(bean!=null){
                 Long id=bean.getId();
@@ -89,7 +96,7 @@ public class TestAPI {
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Object delete(@PathVariable Long id){
-
+        logger.info("Service to Call [DELETE] test for id {}",id);
         try{
             if(id==null){
                 throw new Exception("Id cannot be null!");

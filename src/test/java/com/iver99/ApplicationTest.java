@@ -1,3 +1,5 @@
+package com.iver99;
+
 import com.iver99.rest.TestAPI;
 import org.junit.Test;
 import org.junit.runner.RunWith;

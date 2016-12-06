@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -51,6 +53,7 @@ public class TestAPITest {
 
     private MockMvc mockMvc;
     private RestTemplate restTemplate = new TestRestTemplate();
+    private final Logger logger= LoggerFactory.getLogger(TestAPITest.class);
 
     @Before
     public void setupMockMvc() {
@@ -70,6 +73,7 @@ public class TestAPITest {
     }*/
     @Test
     public void testGetAPI() throws Exception {
+
         this.mockMvc.perform(get("/test/"+t.getId()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Test Name")))
