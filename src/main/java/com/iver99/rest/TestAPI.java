@@ -29,7 +29,6 @@ public class TestAPI {
     private TestDao testDao;
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    @ResponseBody
     public Object get(@PathVariable Long id) {
 
         logger.info("Service to Call [GET] test for id {}",id);
@@ -48,7 +47,6 @@ public class TestAPI {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
     public Object create(TestBean bean){
         logger.info("Service to Call [POST] test");
         if(bean!=null){
@@ -61,7 +59,6 @@ public class TestAPI {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    @ResponseBody
     public Object update(TestBean bean){
         logger.info("Service to Call [PUT] test");
         try {
@@ -90,7 +87,6 @@ public class TestAPI {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    @ResponseBody
     public Object delete(@PathVariable Long id){
         logger.info("Service to Call [DELETE] test for id {}",id);
         try{
