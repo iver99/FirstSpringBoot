@@ -4,7 +4,6 @@
 
 src/main/resources/application.properties
 src/main/resources/logback.xml
-src/main/webapp/WEB-INF/web.xml
 
 ### STS ###
 .apt_generated
