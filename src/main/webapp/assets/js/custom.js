@@ -29,8 +29,7 @@
         },
 
     }
-   
-   
+
     $(document).ready(function () {
         mainApp.slide_fun();
         mainApp.dataTable_fun();
