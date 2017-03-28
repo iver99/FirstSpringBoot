@@ -21,7 +21,7 @@ import javax.persistence.EntityNotFoundException;
  * Created by chehao on 2016/12/2.
  */
 @RestController
-@RequestMapping("v1/test")
+@RequestMapping("/test")
 public class TestAPI {
 
     private final Logger logger= LoggerFactory.getLogger(TestAPI.class);
