@@ -19,29 +19,29 @@ require(['jquery',
         'bootstrap',
         'ko'],
     function ($, clb, bs, ko) {
-        var test_name = null;
-        var test_address = null;
-        var model = new ViewModel();
-        /*$.ajax({
-            url: "test/2",
+
+        //Test ViewModel
+        function TestViewModel() {
+            self = this;
+            self.name = ko.observable();
+            self.address = ko.observable();
+
+        }
+        var viewModel = new TestViewModel();
+        ko.applyBindings(viewModel);
+        $.ajax({
+            url: "test/1",
             dataType: "json",
             type: "GET",
             success: function (data) {
-                alert(data.name + " " + data.address);
-                test_name = data.name;
-                test_address = data.address;
+                viewModel.name(data.name);
+                viewModel.address(data.address);
             },
             error: function () {
-                alert("error occurred!")
+                console.error("error occurred when request test API")
             }
-        }); */
-        //Test ViewModel
-        function ViewModel() {
-            self = this;
-            self.name = ko.observable("chehao");
-            self.address = ko.observable("oracle");
+        });
 
-        }
 
-         ko.applyBindings(new ViewModel());
+
     });
