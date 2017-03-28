@@ -2,8 +2,6 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
-src/main/resources/application.properties
-src/main/resources/logback.xml
 
 ### STS ###
 .apt_generated
