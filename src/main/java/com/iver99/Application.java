@@ -1,4 +1,4 @@
-package com.iver99.config;
+package com.iver99;
 
 import com.iver99.rest.TestAPI;
 import org.springframework.boot.SpringApplication;
@@ -12,9 +12,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 /**
  * Created by chehao on 2016/12/6.
  */
-@ComponentScan("com.iver99.*")
-@EnableJpaRepositories("com.iver99.*")
-@EntityScan("com.iver99.*")
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 
