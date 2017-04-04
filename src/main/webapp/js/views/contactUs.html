@@ -1,0 +1,120 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <div class="contact-heading">
+        <h3>Contact Us</h3>
+    </div>
+    <form id="contactUsForm" class="contact-form-container">
+        <div class="oj-form-layout" id="contact-form-container">
+            <div class="oj-form">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item">
+                                    <label class="form-column-header" for="contactName">Enter Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="contactName" rows="1" data-bind="ojComponent: {component: 'ojTextArea',
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item">
+                                    <label class="form-column-header" for="contactEmail">Enter Email</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="contactEmail" rows="1" data-bind="ojComponent: {component: 'ojTextArea',
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item">
+                                    <label class="form-column-header" for="contactSubject">Subject</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="contactSubject" rows="1" data-bind="ojComponent: {component: 'ojTextArea',
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item ">
+                                    <label class="form-column-header" for="control2">Enter Message</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="control2" rows="6" data-bind="ojComponent: {component: 'ojTextArea', 
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="contactForRoleForm">
+                <label class="form-column-header" id="mainlabelid">For Role</label>
+                <div id="contactForRoleCheckboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', 
+             invalidComponentTracker: tracker,
+             required: true, value: currentRole}">
+                    <span class="oj-choice-item">
+            <input id="webmasterOpt" type="checkbox" value="webmaster">
+            <label for="webmasterOpt">WebMaster</label>
+        </span>
+                    <span class="oj-choice-item">
+            <input id="adminOpt" type="checkbox" value="admin">
+            <label for="adminOpt">Admin</label>
+        </span>
+                    <span class="oj-choice-item">
+            <input id="developerOpt" type="checkbox" value="developer">
+            <label for="developerOpt">Developer</label>
+        </span>
+                </div>
+                <div id='buttons-container'>
+                    <input id="clearRoleButton" type="button" data-bind=" 
+                click: clearRolesOption,
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Clear option'}" />
+                    <input id="valideRoleButton" type="button" data-bind=" 
+                click: validateContactRoleOption,
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Validate'}" /><br/>
+                </div>
+
+            </div>
+            <div>
+                <input id="contactMessageSubmitButton" type="submit" class="submit-button" data-bind="click: contactMessageSubmit, 
+                      ojComponent: {component: 'ojButton', label: 'Submit'}" /></div>
+        </div>
+
+    </form>
+</div>
