@@ -1,0 +1,87 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+
+<div class="oj-hybrid-padding">
+    <div>
+        <div class="activities-heading">
+            <h3>Activity List</h3>
+        </div>
+        <div id="tabs-container">
+            <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+                <!-- tab bar -->
+                <ul>
+                    <li><span title="Avaliable activities, can enroll." class="activity-tab-title">Current</span></li>
+                    <li><span title="Activity over, only browser, can not enroll!" class="activity-tab-title">History</span></li>
+                </ul>
+
+                <!-- tab contents -->
+                <div id="tabs-1">
+                    <div class="activities-container" style="position: relative;">
+                        <ul style='list-style-type:none' data-bind="foreach: currentActivityItems">
+                            <li class="selectable selected" data-bind="attr: { id: id }">
+                                <div class="oj-flex">
+                                    <div class="current-activit-title oj-flex-item">
+                                        <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                                    </div>
+                                    <input class="enroll-button" type="button" value="Enroll" onclick="activityEnroll(this)" />
+                                </div>
+                                <div class="date-grid oj-flex">
+                                    <div class=" oj-flex-item">
+                                        <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <p data-bind="text: 'Activity Time : ' + activity_time">
+                                        </p>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <p data-bind="text: 'Activity Place : ' + activity_place">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="activity-description activity-description-text-overflow">
+                                    <a title="Click to see activity detail" data-bind="text: description"></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:currentActivityDataSource, pageSize:10}"></div>
+                    </div>
+                </div>
+                <div id="tabs-2">
+                    <div class="activities-container" style="position: relative;">
+                        <ul style='list-style-type:none' data-bind="foreach: historyActivityItems">
+                            <li class="selectable selected" data-bind="attr: { id:id }">
+                                <div class="oj-flex">
+                                    <div class="over-activity-title oj-flex-item">
+                                        <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                                    </div>
+                                </div>
+                                <div class="date-grid oj-flex">
+                                    <div class=" oj-flex-item">
+                                        <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <p data-bind="text: 'Activity Time : ' + activity_time">
+                                        </p>
+                                    </div>
+                                    <div class="oj-flex-item">
+                                        <p data-bind="text: 'Activity Place : ' + activity_place">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="activity-description activity-description-text-overflow">
+                                    <a href="#" data-bind="text: description"></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:currentActivityDataSource, pageSize:10}"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
