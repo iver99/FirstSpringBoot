@@ -1,0 +1,146 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <div class="feedback-heading">
+        <h3>Activity Editor</h3>
+    </div>
+
+    <form id="contactUsForm" class="contact-form-container">
+        <div class="oj-form-layout">
+            <div class="oj-form">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="subject">Subject</label>
+                        <textarea id="subject" rows="1" data-bind="ojComponent: {component: 'ojTextArea', required: true, value: subject,
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }} "></textarea>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="startTime">Start Time</label>
+                        <input id="startTime" data-bind="ojComponent: {component: 'ojInputDateTime', 
+                                                value: startTime,  required: true}" />
+                    </div>
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="endTime">End Time</label>
+                        <input id="endTime" data-bind="ojComponent: {component: 'ojInputDateTime',  required: true,
+                                                value: endTime}" />
+                    </div>
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="place">Place</label>
+                        <input id="place" data-bind="ojComponent: 
+                   {component: 'ojInputText', value:place, required: true}">
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="capacity">Capacity</label>
+
+                        <input id="capacity" data-bind="ojComponent: {component: 'ojInputNumber', required: true, max:max,min:min, step:step, value:currentValue}" />
+                    </div>
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="manager">Manager</label>
+                        <input id="manager" data-bind="ojComponent: 
+                   {component: 'ojInputText', value:manager}">
+                    </div>
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="contact">Contact</label>
+                        <input id="contact" data-bind="ojComponent: 
+                   {component: 'ojInputText', value:contact}">
+                    </div>
+                </div>
+
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="activityDescription">Description</label>
+                        <textarea id="activityDescription" rows="6" data-bind="ojComponent: {component: 'ojTextArea', value: description,
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <input type="submit" class="submit-button" data-bind="click: activityPublish, 
+                      ojComponent: {component: 'ojButton', label: 'Publish'}" />
+                <input type="button" data-bind=" 
+                click: clearActivityInput,
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Clear Input'}" />
+            </div>
+        </div>
+
+    </form>
+
+    <div class="activities-heading published-activityies-block">
+        <h3>Published Activities</h3>
+    </div>
+
+    <div class="announcement-container" style="position: relative;">
+        <ul style='list-style-type:none' data-bind="foreach: publishedActivityItems">
+            <li class="selectable selected" data-bind="attr: { id: id }">
+
+                <div class="oj-flex">
+                    <div class="current-activit-title oj-flex-item">
+                        <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                    </div>
+                </div>
+                <div class="date-grid oj-flex">
+                    <div class=" oj-flex-item">
+                        <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                    </div>
+                    <div class="oj-flex-item">
+                        <p data-bind="text: 'Start Time : ' + start_time">
+                        </p>
+                    </div>
+                    <div class="oj-flex-item">
+                        <p data-bind="text: 'End Time : ' + end_time">
+                        </p>
+                    </div>
+                    <div class="oj-flex-item">
+                        <p data-bind="text: 'Activity Place : ' + activity_place">
+                        </p>
+                    </div>
+                </div>
+                <div class="date-grid oj-flex">
+                    <div class=" oj-flex-item">
+                        <p data-bind="text: 'Manager : '+manager"></p>
+                    </div>
+                    <div class="oj-flex-item">
+                        <p data-bind="text: 'Contact : ' + contact">
+                        </p>
+                    </div>
+                    <div class="oj-flex-item">
+                        <p data-bind="text: 'Enrolled : ' + enrolled + '/' + capacity">
+                        </p>
+                    </div>
+                </div>
+                <div class="activity-description activity-description-text-overflow">
+                    <a title="Click to see activity detail" data-bind="text: description"></a>
+                </div>
+
+                <input class="bottom-edit-button" type="button" value="Edit" data-bind="click: $parent.editActivity,  
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Edit'}" />
+
+                <!--
+                <input class="bottom-edit-button" type="button" onclick="cancelActivity(this)" value="Edit" data-bind="  
+                ojComponent: {
+                  component: 'ojButton'}" />
+-->
+                <input class="bottom-edit-button" type="button" onclick="cancelActivity(this)" value="Cancel" data-bind="  
+                ojComponent: {
+                  component: 'ojButton'}" />
+            </li>
+        </ul>
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:publishedActivityDataSource, pageSize:10}"></div>
+    </div>
+
+</div>
