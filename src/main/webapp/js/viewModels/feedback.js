@@ -9,7 +9,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
         'ojs/ojcheckboxset', 'ojs/ojbutton'],
     function (oj, ko, $) {
 
-        function ContactUsViewModel() {
+        function FeedbackViewModel() {
             var self = this;
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
             // Please reference the ojModule jsDoc for additionaly available methods.
@@ -44,6 +44,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                 self.contactMessageSubmit = function (data, event) {
                     alert("Submit message!")
                 }
+
+                var feedbackArray = [
+                    {
+                        "id": "003",
+                        "title": "Welcome!",
+                        "created_at": "2017-04-04",
+                        "user_email": "yuanyuan.shen@oracle.com"
+
+    },
+                    {
+                        "id": "002",
+                        "title": "Welcome to give a feedback!",
+                        "created_at": "2017-04-02",
+                        "user_email": "yuanyuan.shen@oracle.com"
+    },
+                    {
+                        "id": "001",
+                        "title": "Welcome to give a feedback!",
+                        "created_at": "2017-04-01",
+                        "user_email": "yuanyuan.shen@oracle.com"
+    }
+];
+                self.feedbackDataSource = new oj.ArrayPagingDataSource(feedbackArray);
+                self.feedbackItems = self.feedbackDataSource.getWindowObservable();
             };
 
             /**
@@ -90,6 +114,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
          * each time the view is displayed.  Return an instance of the ViewModel if
          * only one instance of the ViewModel is needed.
          */
-        return new ContactUsViewModel();
+        return new FeedbackViewModel();
     }
 );

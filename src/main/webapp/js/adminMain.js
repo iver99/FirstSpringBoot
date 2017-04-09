@@ -47,9 +47,9 @@ requirejs.config({
  * by the modules themselves), we are listing them explicitly to get the references to the 'oj' and 'ko'
  * objects in the callback
  */
-require(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'ojs/ojknockout',
+require(['ojs/ojcore', 'knockout', 'jquery', 'adminController', 'ojs/ojknockout',
   'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'bootstrap', 'ojs/ojinputtext', 'ojs/ojknockout-validation',
-        'ojs/ojcheckboxset'],
+        'ojs/ojcheckboxset', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata'],
     function (oj, ko, $, app) { // this callback gets executed when all required modules are loaded
 
         $(function () {
@@ -74,10 +74,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'ojs/ojknockout',
                 init();
             }
 
-            //Active hot activity slide
-            $('#carousel-example').carousel({
-                interval: 3000 // THIS TIME IS IN MILLI SECONDS
-            });
 
         });
 

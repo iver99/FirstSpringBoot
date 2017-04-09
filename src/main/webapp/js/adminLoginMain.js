@@ -12,6 +12,7 @@ requirejs.config({
     baseUrl: 'js',
 
     // Path mappings for the logical module names
+    // Update the main-release-paths.json for release mode when updating the mappings
     paths:
     //injector:mainReleasePaths
     {
@@ -47,40 +48,27 @@ requirejs.config({
  * by the modules themselves), we are listing them explicitly to get the references to the 'oj' and 'ko'
  * objects in the callback
  */
-require(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'ojs/ojknockout',
-  'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'bootstrap', 'ojs/ojinputtext', 'ojs/ojknockout-validation',
-        'ojs/ojcheckboxset'],
-    function (oj, ko, $, app) { // this callback gets executed when all required modules are loaded
+require(['ojs/ojcore', 'knockout', 'jquery', 'adminLoginController', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu', 'ojs/ojinputtext'],
+    function (oj, ko, $, adminLoginController) { // this callback gets executed when all required modules are loaded
 
         $(function () {
 
             function init() {
-                oj.Router.sync().then(
-                    function () {
-                        // Bind your ViewModel for the content of the whole page body.
-                        ko.applyBindings(app, document.getElementById('globalBody'));
-                    },
-                    function (error) {
-                        oj.Logger.error('Error in root start: ' + error.message);
-                    }
-                );
+                // Bind your ViewModel for the content of the whole page body.
+                ko.applyBindings(adminLoginController, document.getElementById('adminLoginGlobalBody'));
+
             }
 
             // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready 
             // event before executing any code that might interact with Cordova APIs or plugins.
-            if ($(document.body).hasClass('oj-hybrid')) {
-                document.addEventListener("deviceready", init);
-            } else {
-                init();
-            }
-
-            //Active hot activity slide
-            $('#carousel-example').carousel({
-                interval: 3000 // THIS TIME IS IN MILLI SECONDS
-            });
+            //            if ($(document.body).hasClass('oj-hybrid')) {
+            //                document.addEventListener("deviceready", init);
+            //            } else {
+            //                init();
+            //            }
+            init();
 
         });
-
 
     }
 );

@@ -6,9 +6,9 @@
  * Your application specific code will go here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas', 'ojs/ojdialog'],
+  'ojs/ojoffcanvas', 'ojs/ojdialog', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata'],
     function (oj, ko) {
-        function ControllerViewModel() {
+        function AdminControllerViewModel() {
             var self = this;
 
             // Media queries for repsonsive layouts
@@ -20,18 +20,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Router setup
             self.router = oj.Router.rootInstance;
             self.router.configure({
-                'hotActivities': {
-                    label: 'Hot Activities',
+                'adminActivity': {
+                    label: 'Manage Activity',
                     isDefault: true
                 },
-                'activities': {
-                    label: 'Activities'
+                'adminAnnouncement': {
+                    label: 'Manage Announcement'
                 },
-                'announcements': {
-                    label: 'Announcements'
-                },
-                'feedback': {
-                    label: 'Feedback'
+                'adminFeedback': {
+                    label: 'Manage Feedback'
                 }
             });
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -39,23 +36,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Navigation setup
             var navData = [
                 {
-                    name: 'Hot Activities',
-                    id: 'hotActivities',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'
-                },
-                {
-                    name: 'Activities',
-                    id: 'activities',
+                    name: 'Manage Activity',
+                    id: 'adminActivity',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-catalog-icon-24'
                 },
                 {
-                    name: 'Announcements',
-                    id: 'announcements',
+                    name: 'Manage Announcement',
+                    id: 'adminAnnouncement',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'
                 },
                 {
-                    name: 'Feedback',
-                    id: 'feedback',
+                    name: 'Manage Feedback',
+                    id: 'adminFeedback',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-edit-icon-24'
                 }
       ];
@@ -86,9 +78,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
 
             // Header
             // Application Name used in Branding Area
-            self.appName = ko.observable("OCH Club");
+            self.appName = ko.observable("OCH Club Management");
             // User Info used in Global Navigation area
-            self.userLogin = ko.observable("yuanyuan.shen@oracle.com");
+            self.userLogin = ko.observable("Admin");
 
             // open login dialog
             //            self.loginClick = function () {
@@ -116,6 +108,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
       ]);
         }
 
-        return new ControllerViewModel();
+        return new AdminControllerViewModel();
     }
 );
