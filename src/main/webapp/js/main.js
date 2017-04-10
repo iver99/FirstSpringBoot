@@ -64,6 +64,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'ojs/ojknockout',
                         oj.Logger.error('Error in root start: ' + error.message);
                     }
                 );
+
             }
 
             // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready 
@@ -73,6 +74,80 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'ojs/ojknockout',
             } else {
                 init();
             }
+
+            //register
+            $('#registerId').click(function register(){
+
+                var userName = $('#usernamesignup').val();
+                var email = $('#emailsignup').val();
+                var password = $('#passwordsignup').val();
+                var passwordConfirm = $('#passwordsignup_confirm').val();
+
+                //validation
+                if(userName == "" || email == "" || password == "" || passwordConfirm == ""){
+                    alert("不能有空值！");
+                    return;
+                }
+                if(userName.length < 6){
+                    alert("用户名长度不得小于6个字符，请重新输入！");
+                    $('#usernamesignup').val("");
+                    return;
+                }
+                if(password != passwordConfirm) {
+                    alert("两次输入的密码不同，请重新输入！");
+                    $('#passwordsignup').val("");
+                    $('#passwordsignup_confirm').val("");
+                    return;
+                }
+                if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
+                   alert("邮箱格式错误，请重新输入！");
+                   $('#emailsignup').val("");
+                   return;
+                }
+                if(password.length < 6) {
+                    alert("密码长度需大于6位，请重新输入密码！");
+                    $('#passwordsignup').val("");
+                    $('#passwordsignup_confirm').val("");
+                    return;
+                }
+                var registerData = {"userName":userName, "email":email, "password": password}
+                //register
+                $.ajax({
+                    url : '/test/register',
+                    async : false,
+                    type : "POST",
+                    data : registerData,
+                    datatype : "json",
+                    success : function (data){
+                        alert("register success!" + data);
+                        $('#loginRegisterModal').modal('hide');
+                    }
+                });
+            });
+
+            //login
+            $('#loginSubmitButon').click(function login(){
+
+                var userName = $('#username').val();
+                var password = $('#password').val();
+                var loginData = {"userName":userName, "password":password}
+                if(userName.length < 6 || password.length < 6){
+                    alert("请输入有效的用户名密码！");
+                    return;
+                }
+                $.ajax({
+                    url : '/test/login',
+                    async : false,
+                    type : "POST",
+                    data : loginData,
+                    datatype : "json",
+                    success : function (data){
+                        alert("login success!" + data);
+                        $('#loginRegisterModal').modal('hide');
+                        //TODO 增加登录后的用户名显示等
+                    }
+                });
+            });
 
             //Active hot activity slide
             $('#carousel-example').carousel({
