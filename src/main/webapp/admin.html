@@ -51,23 +51,21 @@
     <!-- This is bootstrap css file -->
     <link rel="stylesheet" href="css/libs/bootstrap/bootstrap.css" type="text/css" />
 
-    <script type="text/javascript">
-        var click = 0;
+<script type="text/javascript">
+    var click = 0;
 
-        function activityEnroll(btn) {
-            if (click == 0) {
-                btn.style.color = "#a5aeb0";
-                btn.value = "Enrolled"
-                click = 1;
-            } else {
-                btn.style.color = "rgb(29, 162, 193)";
-                btn.value = "Enroll"
-                click = 0;
-            }
+    function cancelActivity(btn) {
+        if (click == 0) {
+            btn.style.color = "#a5aeb0";
+            btn.value = "Canceled"
+            click = 1;
+        } else {
+            btn.style.color = "rgb(29, 162, 193)";
+            btn.value = "Cancel"
+            click = 0;
         }
-
-    </script>
-
+    }
+</script>
 </head>
 
 <body class="oj-web-applayout-body">
@@ -108,79 +106,7 @@
            ** and the CSS documentation under Support/API Docs/Non-Component Styling
            ** on the JET website for more information on how to use this pattern.
         -->
-            <!-- Login 模态框（Modal） -->
-            <div class="modal fade" id="loginRegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
-                    <div id="wrapper" class="modal-content">
-                        <div id="login" class="animate form">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					           &times;
-                        </button>
-                                <h1>Log in</h1>
-                            </div>
 
-                            <form action="" autocomplete="on">
-                                <p>
-                                    <label for="username" class="uname" data-icon="u"> Your email or username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
-                                </p>
-                                <p>
-                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p class="keeplogin">
-                                    <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-                                    <label for="loginkeeping">Keep me logged in</label>
-                                </p>
-                                <p class="login button">
-                                    <input id="loginSubmitButon" type="button" value="Login" />
-                                </p>
-                                <p class="change_link">
-                                    Not a member yet ?
-                                    <a href="#toregister" class="to_register">Join us</a>
-                                </p>
-                            </form>
-                        </div>
-
-                        <div id="register" class="animate form">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					           &times;
-                        </button>
-                                <h1>Sign up</h1>
-                            </div>
-                            <form action="" autocomplete="on">
-                                <p>
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
-                                </p>
-                                <p>
-                                    <label for="emailsignup" class="youmail" data-icon="e"> Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com" />
-                                </p>
-                                <p>
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p>
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p class="signin button">
-                                    <input id="registerId" type="button" value="Sign up" />
-                                </p>
-                                <p class="change_link">
-                                    Already a member ?
-                                    <a href="#tologin" class="to_register"> Go and log in </a>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <header role="banner" class="oj-web-applayout-header customer-header">
                 <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
@@ -195,25 +121,8 @@
                         <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
                         <h1 class="oj-web-applayout-header-title application-name" title="Application Name" data-bind="text: appName"></h1>
                     </div>
-                    <a class="text-bold site-header-link" data-toggle="modal" href="#loginRegisterModal">Sign in</a>
-                    <div class="oj-flex-bar-end">
 
-                        <!--
-                        <div style="display:none" id="loginDialog" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless'}">
-                            <div class="oj-dialog-header oj-helper-clearfix">
-                                <span id="dialogTitleId" class="oj-dialog-title"> Login </span>
-                            </div>
-                            <div class="oj-dialog-body">
-                                The dialog window can be moved, resized and closed with the 'x' icon. Arbitrary content can be added to the the oj-dialog-body and oj-dialog-footer sections.
-                            </div>
-                            <div class="oj-dialog-footer">
-                                <button id="loginOkButton" data-bind="ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
-                            </div>
-                        </div>
-                        <div>
-                            <a herf="" id="buttonOpener" data-bind="click: loginClick, ojComponent: {component: 'ojButton', label: 'Sign in'}"></a>
-                        </div>
--->
+                    <div class="oj-flex-bar-end">
 
                         <!-- Responsive Toolbar -->
                         <div data-bind="ojComponent: {component:'ojToolbar'}">
@@ -223,8 +132,6 @@
                   chroming: 'half', menu: '#menu1'}">
                 </button>
                             <ul id='menu1' data-bind="ojComponent: {component: 'ojMenu'}" style="display:none">
-                                <li id="userCenter"><a href="#">User Center</a></li>
-                                <li id="myActivities"><a href="#">My Activities</a></li>
                                 <li id="out"><a href="#">Sign Out</a></li>
                             </ul>
                         </div>
@@ -258,7 +165,7 @@
     </div>
 
     <script type="text/javascript" src="js/libs/require/require.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/adminMain.js"></script>
 
 </body>
 

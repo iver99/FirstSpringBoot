@@ -29,19 +29,23 @@ public class TestAPI {
     private TestDao testDao;
 
     @RequestMapping(value = "activities", method = RequestMethod.GET)
-    public Object get() {
+    public Object getActivityList() {
 
-        String result = "[\n" +
-                "                                                               {\n" +
-                "                                                                   \"id\": \"040\",\n" +
-                "                                                                   \"title\": \"This is an activity title\",\n" +
-                "                                                                   \"publisher\": \"Admin\",\n" +
-                "                                                                   \"status\": \"1\",\n" +
-                "                                                                   \"created_at\": \"2017-02-10\",\n" +
-                "                                                                   \"description\": \"This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.\",\n" +
-                "                                                                   \"activity_time\": \"2017-03-10\",\n" +
-                "                                                                   \"activity_place\": \"Beijing\"\n" +
-                "                                               }]";
+
+        String result = "                [\n" +
+                "                        {\n" +
+                "                        \"id\": \"001\",\n" +
+                "                        \"title\": \"This is an long long long long activity title xxxxxxx\",\n" +
+                "                        \"publisher\": \"Admin\",\n" +
+                "                        \"status\": \"1\",\n" +
+                "                        \"created_at\": \"2017-04-01\",\n" +
+                "                        \"description\": \"This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.\",\n" +
+                "                        \"start_time\": \"04/08/17 01:00 PM\",\n" +
+                "                        \"end_time\": \"04/08/17 03:00 PM\",\n" +
+                "                        \"activity_place\": \"Beijing\"\n" +
+                "                        }]";
+
+
 
         return result;
 

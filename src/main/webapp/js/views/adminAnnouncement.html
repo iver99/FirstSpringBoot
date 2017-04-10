@@ -1,0 +1,83 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <div class="feedback-heading">
+        <h3>Announcement Editor</h3>
+    </div>
+
+    <form id="contactUsForm" class="contact-form-container">
+        <div class="oj-form-layout">
+            <div class="form-column-header" id="myview" data-bind="visible : isReeditMode">
+                Announcement Id :
+                <span data-bind="text:changedAnnouncementId"></span>
+            </div>
+            <div class="oj-form">
+                <div class="oj-flex">
+                    <label class="form-column-header" for="announcementTitle">Title</label>
+                    <textarea id="announcementTitle" rows="1" data-bind="ojComponent: {component: 'ojTextArea', required: true, value: announcementTitle,
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }} "></textarea>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label class="form-column-header" for="announcementDetail">Description</label>
+                        <textarea id="announcementDetail" rows="6" data-bind="ojComponent: {component: 'ojTextArea', value: announcementDetail,
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <input type="submit" class="submit-button" data-bind="click: announcementPublish, 
+                      ojComponent: {component: 'ojButton', label: 'Publish'}" />
+                <input type="button" data-bind=" 
+                click: clearAnnouncementInput,
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Clear Input'}" />
+            </div>
+        </div>
+
+    </form>
+
+    <div class="activities-heading published-activityies-block">
+        <h3>Published Announcements</h3>
+    </div>
+
+    <div class="announcement-container" style="position: relative;">
+        <ul style='list-style-type:none' data-bind="foreach: announcementItems">
+            <li class="selectable selected" data-bind="attr: { id: id }">
+
+                <div class="oj-flex">
+                    <div class="current-activit-title oj-flex-item">
+                        <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                    </div>
+                    <div class=" oj-flex-item">
+                        <p data-bind="text: 'Publish Time: ' + created_at"></p>
+                    </div>
+                </div>
+
+                <div class="activity-description activity-description-text-overflow">
+                    <a title="Click to see activity detail" data-bind="text: description"></a>
+                </div>
+
+                <input class="bottom-edit-button" type="button" data-bind="click: $parent.editAnnouncement,  
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Edit'}" />
+
+                <input class="bottom-edit-button" type="button" data-bind="click: $parent.deleteAnnouncement,  
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Delete'}" />
+            </li>
+        </ul>
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:announcementDataSource, pageSize:10}"></div>
+    </div>
+
+</div>
