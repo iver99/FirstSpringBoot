@@ -59,6 +59,14 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'adminLoginController', 'ojs/ojknoc
 
             }
 
+            $("#admin-loginSubmitButon").click(function(){
+                var username = $("#admin-username").val();
+                var password = $("#admin-password").val();
+                if(username == "Admin" && password == "Admin"){
+                    window.location.href="admin.html";
+                }
+
+            });
             // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready 
             // event before executing any code that might interact with Cordova APIs or plugins.
             //            if ($(document.body).hasClass('oj-hybrid')) {

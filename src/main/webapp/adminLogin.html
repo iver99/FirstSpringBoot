@@ -53,71 +53,71 @@
 </head>
 
 <body class="oj-web-applayout-body">
-    <div id="adminLoginGlobalBody" class="oj-web-applayout-page">
-        <!--
-         ** Oracle JET V3.0.0 web application header pattern.
-         ** Please see the demos under Cookbook/Patterns/App Shell: Web
-         ** and the CSS documentation under Support/API Docs/Non-Component Styling
-         ** on the JET website for more information on how to use this pattern.
-      -->
-        <header role="banner" class="oj-web-applayout-header">
-            <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
-                <div data-bind="css: smScreen() ? 'oj-flex-bar-center-absolute' : 'oj-flex-bar-middle oj-sm-align-items-baseline'">
-                    <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
-                    <h1 class="oj-web-applayout-header-title" title="Application Name" data-bind="text: appName"></h1>
-                </div>
-
+<div id="adminLoginGlobalBody" class="oj-web-applayout-page">
+    <!--
+     ** Oracle JET V3.0.0 web application header pattern.
+     ** Please see the demos under Cookbook/Patterns/App Shell: Web
+     ** and the CSS documentation under Support/API Docs/Non-Component Styling
+     ** on the JET website for more information on how to use this pattern.
+  -->
+    <header role="banner" class="oj-web-applayout-header">
+        <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
+            <div data-bind="css: smScreen() ? 'oj-flex-bar-center-absolute' : 'oj-flex-bar-middle oj-sm-align-items-baseline'">
+                <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
+                <h1 class="oj-web-applayout-header-title" title="Application Name" data-bind="text: appName"></h1>
             </div>
-        </header>
-        <div role="main" class="oj-web-applayout-max-width oj-web-applayout-content">
-            <div id="wrapper" class="">
-                <h1>Admin Login</h1>
-                <form action="logincheck.php" style="width:100%" method="post">
-                    <p>
-                        <label for="username" class="uname" data-icon="u"> Your email or username </label>
-                        <input id="admin-username" name="admin-username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
-                    </p>
-                    <br/>
-                    <p>
-                        <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                        <input id="admin-password" name="admin-password" required="required" type="password" placeholder="eg. X8df!90EO" />
 
-                    </p>
-                    <p class="login button" style="text-align: center">
-                        <input id="admin-loginSubmitButon" type="submit" name="admin-login-submit" value="Login" />
-                    </p>
-                </form>
-                <!--
+        </div>
+    </header>
+    <div style="width:40%" role="main" class="oj-web-applayout-max-width oj-web-applayout-content admin-login">
+        <div id="wrapper" class="">
+            <h1>Admin Login</h1>
+            <form action="" method="post">
+                <p>
+                    <label for="admin-username" class="uname" data-icon="u"> Your email or username </label>
+                    <input id="admin-username" name="admin-username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
+                </p>
+                <br/>
+                <p>
+                    <label for="admin-password" class="youpasswd" data-icon="p"> Your password </label>
+                    <input id="admin-password" name="admin-password" required="required" type="password" placeholder="eg. X8df!90EO" />
+
+                </p>
+                <p class="login button" style="text-align: center">
+                    <input id="admin-loginSubmitButon" type="button" name="admin-login-submit" value="Login" />
+                </p>
+            </form>
+            <!--
 <form action="logincheck.php" method="post">
-    用户名：<input type="text" name="username" />
-    <br /> 密码：
-    <input type="password" name="password" />
-    <br />
-    <input type="submit" name="submit" value="登陆" />
+用户名：<input type="text" name="username" />
+<br /> 密码：
+<input type="password" name="password" />
+<br />
+<input type="submit" name="submit" value="登陆" />
 
-    <a href="register.php">注册</a>
+<a href="register.php">注册</a>
 </form>
 -->
-            </div>
         </div>
-        <footer class="oj-web-applayout-footer" role="contentinfo">
-            <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
-                <ul>
-                    <!-- ko foreach: footerLinks -->
-                    <li>
-                        <a data-bind="text : name, attr : {id: linkId, href : linkTarget}"></a>
-                    </li>
-                    <!-- /ko -->
-                </ul>
-            </div>
-            <div class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-secondary-color oj-text-sm">
-                Copyright © 2014, 2017 Oracle and/or its affiliates All rights reserved.
-            </div>
-        </footer>
     </div>
+    <footer class="oj-web-applayout-footer" role="contentinfo">
+        <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
+            <ul>
+                <!-- ko foreach: footerLinks -->
+                <li>
+                    <a data-bind="text : name, attr : {id: linkId, href : linkTarget}"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-secondary-color oj-text-sm">
+            Copyright © 2014, 2017 Oracle and/or its affiliates All rights reserved.
+        </div>
+    </footer>
+</div>
 
-    <script type="text/javascript" src="js/libs/require/require.js"></script>
-    <script type="text/javascript" src="js/adminLoginMain.js"></script>
+<script type="text/javascript" src="js/libs/require/require.js"></script>
+<script type="text/javascript" src="js/adminLoginMain.js"></script>
 
 </body>
 
