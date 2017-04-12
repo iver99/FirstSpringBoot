@@ -20,12 +20,12 @@ public class AuthAPI {
     public Object checkLogin(String userName,String password){
        if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
            LOGGER.warn("UserName or Password cannot be empty!");
-           return new MsgModel("UserName or Password cannot be empty!",false);
+           return new MsgModel(null,"UserName or Password cannot be empty!",false);
        }
        if(userName.equals("admin") && password.equals("admin")){
-           return new MsgModel("Login success!",true);
+           return new MsgModel(null, "Login success!",true);
        }
-        return new MsgModel("Login failed!",false);
+        return new MsgModel(null,"Login failed!",false);
 
     }
 
