@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,14 +82,67 @@ public class ActivityAPI {
             LOGGER.error("id cannot be null!");
             return new MsgModel(null, "Id is not correct", false);
         }
-        //FIXME
+        if(activityBean == null){
+            LOGGER.error("update activity data is empty or null!");
+            return new MsgModel(null, "update activity data is null or empty", false);
+        }
+        if(!activityDao.exists(id)){
+            LOGGER.warn("Specified id is not exited! for update activity.");
+            return new MsgModel(null, "update activity fail due to id not exits",false);
+        }
+        Activity activity = activityDao.getOne(id);
+        if(activityBean.getTitle()!=null){
+            activity.setTitle(activityBean.getTitle());
+            LOGGER.info("title is updated!");
+        }
+        if(activityBean.getContact()!=null){
+            activity.setContact(activityBean.getContact());
+            LOGGER.info("title is updated!");
+        }
+        if(activityBean.getDescription()!=null){
+            activity.setDescription(activityBean.getDescription());
+            LOGGER.info("desc is updated!");
+        }
+        if(activityBean.getStart_time()!=null){
+            activity.setStart_time(activityBean.getStart_time());
+            LOGGER.info("start time is updated!");
+        }
+        if(activityBean.getEnd_time()!=null){
+            activity.setEnd_time(activityBean.getEnd_time());
+            LOGGER.info("end time is updated!");
+        }
+        if(activityBean.getActivity_place()!=null){
+            activity.setActivity_place(activityBean.getActivity_place());
+            LOGGER.info("activity place is updated!");
+        }
+        if(activityBean.getCapacity()!=null){
+            activity.setCapacity(activityBean.getCapacity());
+            LOGGER.info("capacity is updated!");
+        }
+
+        //update
+        activityDao.save(activity);
         return new MsgModel(null,"update activities success",true);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public Object createActivity(ActivityBean activityBean){
         LOGGER.info("Service to call POST activity");
-        //FIXME
+        Activity activity = new Activity();
+        activity.setTitle(activityBean.getTitle());
+        activity.setContact(activityBean.getContact());
+        activity.setDescription(activityBean.getDescription());
+        activity.setStart_time(activityBean.getStart_time());
+        activity.setEnd_time(activityBean.getEnd_time());
+        activity.setActivity_place(activityBean.getActivity_place());
+        activity.setCapacity(activityBean.getCapacity());
+        activity.setDescription(activityBean.getDescription());
+
+        activity.setPublisher(activityBean.getPublisher());
+        activity.setEnrolled(activity.getEnrolled());
+        activity.setCreated_at(new Date());
+
+        activityDao.save(activity);
         return new MsgModel(null,"create activities success",true);
     }
 
