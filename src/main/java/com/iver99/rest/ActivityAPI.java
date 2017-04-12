@@ -158,6 +158,11 @@ public class ActivityAPI {
         activityBean.setManager(activity.getManager());
         activityBean.setTitle(activity.getTitle());
         activityBean.setStart_time(activity.getStart_time());
+        activityBean.setStatus(activity.getStatus());
+        activityBean.setPublisher(activity.getPublisher());
+        activityBean.setUpdate_time(activity.getUpdate_time());
+        activityBean.setDescription(activity.getDescription());
+        
         return activityBean;
     }
 
