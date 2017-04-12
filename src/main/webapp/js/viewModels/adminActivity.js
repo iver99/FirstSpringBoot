@@ -9,6 +9,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
         'ojs/ojcheckboxset', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojinputnumber', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource'],
     function (oj, ko, $) {
 
+        // data format 工具
+        Date.prototype.format = function(format) {
+               var date = {
+                      "M+": this.getMonth() + 1,
+                      "d+": this.getDate(),
+                      "h+": this.getHours(),
+                      "m+": this.getMinutes(),
+                      "s+": this.getSeconds(),
+                      "q+": Math.floor((this.getMonth() + 3) / 3),
+                      "S+": this.getMilliseconds()
+               };
+               if (/(y+)/i.test(format)) {
+                      format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+               }
+               for (var k in date) {
+                      if (new RegExp("(" + k + ")").test(format)) {
+                             format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                                    ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                      }
+               }
+               return format;
+        }
+
         function ManageActivityViewModel() {
             var self = this;
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -44,7 +67,44 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                 self.min = ko.observable(1);
                 self.step = ko.observable(1);
 
-                // clear activity editor
+                var createdActivityArray = new Array();
+                var publishedActivityArray = new Array();
+                var currentEditId = -1;
+
+                // 获取所有活动
+                $.ajax({
+                    url : '/v1/activity',
+                    async : false,
+                    type : "GET",
+                    datatype : "json",
+                    success : function (result){
+
+//                        alert(data.object);
+//                        var result = data;
+//                        alert("get" + result);
+
+                        // failed
+                        if(result.success == 0){
+                            alert("Get all activities failed : " + result.msg);
+                            return false;
+                        }else {  //success
+                            console.log(result.object.length);
+//                            alert(result.object[0].status + result.object[0])
+                            for(var i=0; i<result.object.length; i++) {
+//                                if(result.object[i].status == 0) {
+                                    createdActivityArray.push(result.object[i]);
+//                                }else{
+//                                    publishedActivityArray.push(result.object[i]);
+//                                }
+                            }
+
+                        }
+                    }
+                });
+
+
+
+                // clear activity editor ; also cancle the current edit activity
                 self.clearActivityInput = function () {
                     self.subject("");
                     self.place("");
@@ -54,235 +114,213 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                     self.startTime(oj.IntlConverterUtils.dateToLocalIso(new Date()));
                     self.endTime(oj.IntlConverterUtils.dateToLocalIso(new Date()));
                     self.currentValue(10);
+                    currentEditId = -1;
                     return true;
                 }
 
 
+
+                // editor 里 发布活动
                 self.activityPublish = function (data, event) {
                     alert("Publish an activity!");
+                    var createTime = new Date().format('MM/dd/yyyy hh:mm');
+                    // 区分editor 是 新建的活动 还是 edit 按钮上来的活动
+                    if(currentEditId == -1){  // edit 编辑已有的活动并发布
+                        var publishActivityData =
+                        {
+                            "id":currentEditId,
+                            "title": $("#subject").val(),
+                            "publisher": $("#subject").val(),
+                            "status": 1,
+                            "created_at": createTime,
+                            "description": $("#activityDescription").val(),
+                            "start_time":  $("#startTime").val(),
+                            "end_time":  $("#endTime").val(),
+                            "activity_place":  $("#place").val(),
+                            "manager":  $("#manager").val(),
+                            "contact":  $("#contact").val(),
+                            "capacity":  $("#capacity").val(),
+                            "enrolled": "0"
+                        };
+
+                        $.ajax({
+                            url : '/v1/activity/' + currentEditId,
+                            async : false,
+                            type : "PUT",
+                            data: JSON.stringify(publishActivityData),
+                            datatype : "json",
+                            success : function (result){
+                                // failed
+                                if(result.success == 0){
+                                    alert("Publish activity failed : " + result.msg);
+                                    return false;
+                                }else {  //success
+                                    alert("Publish activity success !");
+                                }
+                            }
+                        });
+                    }else { // 创建活动并发布
+                        var publishActivityData =
+                        {
+                            "title": $("#subject").val(),
+                            "publisher": $("#subject").val(),
+                            "status": 1,
+                            "created_at": createTime,
+                            "description": $("#activityDescription").val(),
+                            "start_time":  $("#startTime").val(),
+                            "end_time":  $("#endTime").val(),
+                            "activity_place":  $("#place").val(),
+                            "manager":  $("#manager").val(),
+                            "contact":  $("#contact").val(),
+                            "capacity":  $("#capacity").val(),
+                            "enrolled": "0"
+                        };
+
+                        $.ajax({
+                            url : '/v1/activity',
+                            async : false,
+                            type : "POST",
+                            data: JSON.stringify(publishActivityData),
+                            datatype : "json",
+                            success : function (result){
+                                // failed
+                                if(result.success == 0){
+                                    alert("Publish activity failed : " + result.msg);
+                                    return false;
+                                }else {  //success
+                                    alert("Publish activity success !");
+                                }
+                            }
+                        });
+                    }
+
                     return true;
                 }
 
-                var publishedActivityArray = [
-                    {
-                        "id": "001",
-                        "title": "This is an long long long long activity title xxxxxxx",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-01",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/08/17 01:00 PM",
-                        "end_time": "04/08/17 03:00 PM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "002",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-01",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/09/17 10:00 AM",
-                        "end_time": "04/09/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "003",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-02",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/10/17 10:00 AM",
-                        "end_time": "04/10/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "004",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-02",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/20/17 10:00 AM",
-                        "end_time": "04/20/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "005",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-03",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/23/17 10:00 AM",
-                        "end_time": "04/23/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "006",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-03",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/24/17 10:00 AM",
-                        "end_time": "04/24/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "007",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-04",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "008",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-04",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    }, {
-                        "id": "009",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-05",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "010",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-05",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "011",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-06",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "012",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-06",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/03/17 09:00 AM",
-                        "end_time": "05/03/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "013",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-07",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    },
-                    {
-                        "id": "014",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-07",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/03/17 10:00 AM",
-                        "end_time": "05/03/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-    }
-];
+                // editor 里 保存活动
+                self.activityCreate = function (data, event) {
+                    console.log("Create an activity!");
+                    var createTime = new Date().format('MM/dd/yyyy hh:mm');
+                    if(currentEditId == -1){  // 创建 并 保存活动
+                        var createActivityData =
+                        {
+                            "title": $("#subject").val(),
+                            "publisher": $("#subject").val(),
+                            "status": 0,
+                            "created_at": createTime,
+                            "description": $("#activityDescription").val(),
+                            "start_time":  $("#startTime").val(),
+                            "end_time":  $("#endTime").val(),
+                            "activity_place":  $("#place").val(),
+                            "manager":  $("#manager").val(),
+                            "contact":  $("#contact").val(),
+                            "capacity":  $("#capacity").val(),
+                            "enrolled": "0"
+                        };
+
+                        $.ajax({
+                            url : '/v1/activity',
+                            async : false,
+                            type : "POST",
+                            data: JSON.stringify(createActivityData),
+                            datatype : "json",
+                            success : function (result){
+                                // failed
+                                if(result.success == 0){
+                                    alert("Create activity failed : " + result.msg);
+                                    return false;
+                                }else {  //success
+                                    alert("Create activity success !");
+                                }
+                            }
+                        });
+                    }else{  // 更新 并保存活动
+                        var createActivityData =
+                        {
+                            "id" : currentEditId,
+                            "title": $("#subject").val(),
+                            "publisher": $("#subject").val(),
+                            "status": 0,
+                            "created_at": createTime,
+                            "description": $("#activityDescription").val(),
+                            "start_time":  $("#startTime").val(),
+                            "end_time":  $("#endTime").val(),
+                            "activity_place":  $("#place").val(),
+                            "manager":  $("#manager").val(),
+                            "contact":  $("#contact").val(),
+                            "capacity":  $("#capacity").val(),
+                            "enrolled": "0"
+                        };
+
+                        $.ajax({
+                            url : '/v1/activity/' + currentEditId,
+                            async : false,
+                            type : "POST",
+                            data: JSON.stringify(createActivityData),
+                            datatype : "json",
+                            success : function (result){
+                                // failed
+                                if(result.success == 0){
+                                    alert("Create activity failed : " + result.msg);
+                                    return false;
+                                }else {  //success
+                                    alert("Create activity success !");
+                                }
+                            }
+                        });
+                    }
+
+                    return true;
+                }
+/*
+//                var publishedActivityArray = [
+//                    {
+//                        "id": "001",
+//                        "title": "This is an long long long long activity title xxxxxxx",
+//                        "publisher": "Admin",
+//                        "status": "1",
+//                        "created_at": "2017-04-01",
+//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
+//                        "start_time": "04/08/17 01:00 PM",
+//                        "end_time": "04/08/17 03:00 PM",
+//                        "activity_place": "Beijing",
+//                        "manager": "Vivian",
+//                        "contact": "12345678912",
+//                        "capacity": "20",
+//                        "enrolled": "12"
+//    },
+//                    {
+//                        "id": "014",
+//                        "title": "This is an activity title",
+//                        "publisher": "Admin",
+//                        "status": "1",
+//                        "created_at": "2017-04-07",
+//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
+//                        "start_time": "05/03/17 10:00 AM",
+//                        "end_time": "05/03/17 11:00 AM",
+//                        "activity_place": "Beijing",
+//                        "manager": "Vivian",
+//                        "contact": "12345678912",
+//                        "capacity": "20",
+//                        "enrolled": "12"
+//    }
+//];
+*/
                 // 删除第一个元素 publishedActivityArray.shift();
                 // 添加元素到数组的最后 publishedActivityArray.push();
 
                 self.publishedActivityDataSource = new oj.ArrayPagingDataSource(publishedActivityArray);
                 self.publishedActivityItems = self.publishedActivityDataSource.getWindowObservable();
 
-                // Eidt a published activity
+                self.unpublishedActivityDataSource = new oj.ArrayPagingDataSource(createdActivityArray);
+                self.unpublishedActivityItems = self.unpublishedActivityDataSource.getWindowObservable();
+
+
+
+                // Eidt a created activity
                 self.editActivity = function (item) {
 
+                    currentEditId = item.id;
                     self.subject(item.title);
                     self.place(item.activity_place);
                     self.description(item.description);
@@ -293,6 +331,85 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                     self.contact(item.contact);
                     self.currentValue(item.capacity);
                 }
+
+                // Publish a created activity
+                self.publishActivity = function (item) {
+                    alert(item.id);
+                    var createdActivityData =
+                    {
+                        "id" : item.id,
+                        "update_time" : new Date().format('MM/dd/yyyy hh:mm')
+                    };
+                    alert("Publish a activity" + JSON.stringify(createdActivityData));
+                    $.ajax({
+                        url : 'v1/activity/'+id,
+                        async : false,
+                        type : "PUT",
+                        data: JSON.stringify(createdActivityData),
+                        datatype : "json",
+                        success : function (result){
+                            // failed
+                            if(result.success == 0){
+                                alert("Publish activity failed : " + result.msg);
+                                return false;
+                            }else {  //success
+                                alert("Publish activity success !");
+                            }
+                        }
+                    });
+                }
+
+                // Delete a published activity
+                self.deleteActivity = function (item) {
+                    var deleteActivityData =
+                    {
+                        "id" : item.id,
+                    };
+                    $.ajax({
+                        url : '/v1/activity/' + item.id,
+                        async : false,
+                        type : "DELETE",
+                        data: JSON.stringify(createdActivityData),
+                        datatype : "json",
+                        success : function (result){
+                            // failed
+                            if(result.success == 0){
+                                alert("Delete activity failed : " + result.msg);
+                                return false;
+                            }else {  //success
+                                alert("Delete activity success !");
+                            }
+                        }
+                    });
+//                    alert("Delete an activity" + item.title);
+                }
+
+                // cancel published activity 在 published tab 下取消已发布的活动
+                self.cancelActivity = function (item) {
+                    var deleteActivityData =
+                    {
+                        "id" : item.id,
+                        "status" : "3"
+                    };
+                    $.ajax({
+                        url : '/v1/activity/' + item.id,
+                        async : false,
+                        type : "PUT",
+                        data: JSON.stringify(createdActivityData),
+                        datatype : "json",
+                        success : function (result){
+                            // failed
+                            if(result.success == 0){
+                                alert("Delete activity failed : " + result.msg);
+                                return false;
+                            }else {  //success
+                                alert("Delete activity success !");
+                            }
+                        }
+                    });
+//                    alert("Delete an activity" + item.title);
+                }
+
 
             };
 
