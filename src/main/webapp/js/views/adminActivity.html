@@ -66,81 +66,159 @@
             </div>
 
             <div>
-                <input type="submit" class="submit-button" data-bind="click: activityPublish, 
+                <input type="submit" class="save-button" data-bind="click: activityCreate,
+                      ojComponent: {component: 'ojButton', label: 'Save'}" />
+                <input type="submit" class="submit-button" data-bind="click: activityPublish,
                       ojComponent: {component: 'ojButton', label: 'Publish'}" />
-                <input type="button" data-bind=" 
+                <input type="button" data-bind="
                 click: clearActivityInput,
                 ojComponent: {
-                  component: 'ojButton', 
-                  label: 'Clear Input'}" />
+                  component: 'ojButton',
+                  label: 'Cancel Edit'}" />
             </div>
         </div>
 
     </form>
 
     <div class="activities-heading published-activityies-block">
-        <h3>Published Activities</h3>
+        <h3>Activity List</h3>
     </div>
+    <div id="tabs-container">
+        <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+            <!-- tab bar -->
+            <ul>
+                <li><span title="Avaliable activities, can enroll." class="activity-tab-title">Unpublished</span></li>
+                <li><span title="Activity over, only browser, can not enroll!" class="activity-tab-title">Published</span></li>
+            </ul>
 
-    <div class="announcement-container" style="position: relative;">
-        <ul style='list-style-type:none' data-bind="foreach: publishedActivityItems">
-            <li class="selectable selected" data-bind="attr: { id: id }">
+            <!-- tab contents -->
+            <div id="tabs-1">
+                <div class="activities-container" style="position: relative;">
+                    <ul style='list-style-type:none' data-bind="foreach: unpublishedActivityItems">
+                        <li class="selectable selected" data-bind="attr: { id: id }">
 
-                <div class="oj-flex">
-                    <div class="current-activit-title oj-flex-item">
-                        <a href="#" data-bind="text: title, attr: {title: title}"></a>
-                    </div>
-                </div>
-                <div class="date-grid oj-flex">
-                    <div class=" oj-flex-item">
-                        <p data-bind="text: 'Publlish Time : '+created_at"></p>
-                    </div>
-                    <div class="oj-flex-item">
-                        <p data-bind="text: 'Start Time : ' + start_time">
-                        </p>
-                    </div>
-                    <div class="oj-flex-item">
-                        <p data-bind="text: 'End Time : ' + end_time">
-                        </p>
-                    </div>
-                    <div class="oj-flex-item">
-                        <p data-bind="text: 'Activity Place : ' + activity_place">
-                        </p>
-                    </div>
-                </div>
-                <div class="date-grid oj-flex">
-                    <div class=" oj-flex-item">
-                        <p data-bind="text: 'Manager : '+manager"></p>
-                    </div>
-                    <div class="oj-flex-item">
-                        <p data-bind="text: 'Contact : ' + contact">
-                        </p>
-                    </div>
-                    <div class="oj-flex-item">
-                        <p data-bind="text: 'Enrolled : ' + enrolled + '/' + capacity">
-                        </p>
-                    </div>
-                </div>
-                <div class="activity-description activity-description-text-overflow">
-                    <a title="Click to see activity detail" data-bind="text: description"></a>
-                </div>
+                            <div class="oj-flex">
+                                <div class="current-activit-title oj-flex-item">
+                                    <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                                </div>
+                            </div>
+                            <div class="date-grid oj-flex">
+                                <div class=" oj-flex-item">
+                                    <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Start Time : ' + start_time">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'End Time : ' + end_time">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Activity Place : ' + activity_place">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="date-grid oj-flex">
+                                <div class=" oj-flex-item">
+                                    <p data-bind="text: 'Manager : '+manager"></p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Contact : ' + contact">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Enrolled : ' + enrolled + '/' + capacity">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p>&nbsp
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="activity-description activity-description-text-overflow">
+                                <a title="Click to see activity detail" data-bind="text: description"></a>
+                            </div>
 
-                <input class="bottom-edit-button" type="button" value="Edit" data-bind="click: $parent.editActivity,  
+                            <input class="bottom-edit-button" type="button" data-bind="click: $parent.editActivity,
                 ojComponent: {
-                  component: 'ojButton', 
+                  component: 'ojButton',
                   label: 'Edit'}" />
 
-                <!--
-                <input class="bottom-edit-button" type="button" onclick="cancelActivity(this)" value="Edit" data-bind="  
+                            <input class="bottom-edit-button" type="button" data-bind="click: $parent.publishActivity,
                 ojComponent: {
-                  component: 'ojButton'}" />
--->
-                <input class="bottom-edit-button" type="button" onclick="cancelActivity(this)" value="Cancel" data-bind="  
+                  component: 'ojButton',
+                  label: 'Publish'}" />
+
+                            <input class="bottom-edit-button" type="button" data-bind="click: $parent.deleteActivity,
                 ojComponent: {
-                  component: 'ojButton'}" />
-            </li>
-        </ul>
-        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:publishedActivityDataSource, pageSize:10}"></div>
+                  component: 'ojButton',
+                  label: 'Delete'}" />
+                        </li>
+                    </ul>
+                    <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:unpublishedActivityDataSource, pageSize:10}"></div>
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div class="activities-container" style="position: relative;">
+                    <ul style='list-style-type:none' data-bind="foreach: publishedActivityItems">
+                        <li class="selectable selected" data-bind="attr: { id: id }">
+
+                            <div class="oj-flex">
+                                <div class="current-activit-title oj-flex-item">
+                                    <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                                </div>
+                            </div>
+                            <div class="date-grid oj-flex">
+                                <div class=" oj-flex-item">
+                                    <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Start Time : ' + start_time">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'End Time : ' + end_time">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Activity Place : ' + activity_place">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="date-grid oj-flex">
+                                <div class=" oj-flex-item">
+                                    <p data-bind="text: 'Manager : '+manager"></p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Contact : ' + contact">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text: 'Enrolled : ' + enrolled + '/' + capacity">
+                                    </p>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <p data-bind="text:  (status==1)?'Status : Published':((status==2)?'Status : Finished':((status==3)?'Status : Canceled':((status==4)?'Status : exceed':'Status : null')))">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class=" activity-description activity-description-text-overflow ">
+                                <a title="Click to see activity detail " data-bind="text: description "></a>
+                            </div>
+                            <input class="bottom-edit-button" type="button" data-bind="click: $parent.xx, style :{display:(status==1)?'block':'none' } ,
+                ojComponent: {
+                  component: 'ojButton',
+                  label: 'Cancel'}" />
+                        </li>
+                    </ul>
+                    <div id="paging " data-bind="ojComponent: {component: 'ojPagingControl', data:publishedActivityDataSource, pageSize:10} "></div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+
 
 </div>
