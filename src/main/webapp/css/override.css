@@ -49,7 +49,7 @@
 .customer-header {
     background-color: #f0f0f0;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
-    border-bottom: 3px solid #0572ce;
+    border-bottom: 2px solid #0572ce;
 }
 
 .slide-bdr {
@@ -80,13 +80,13 @@
 }
 
 .activities-container ul {
-    padding-left: 0px;
+    padding-left: -5px;
     padding-right: 0px;
 }
 
 .activities-container ul li {
-    margin-top: 0.5em;
-    border-bottom: 1px solid #eeeeee;
+    /*    margin-top: 0.5em;*/
+    /*    border-bottom: 1px solid #eeeeee;*/
 }
 
 .current-activit-title {
@@ -96,7 +96,7 @@
 .current-activit-title a {
     color: #0b969d;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 600;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -201,10 +201,17 @@
 }
 
 .common-button {
-    margin-right: -5px;
+    width: 40px;
+    height: 30px;
+    margin-right: -20px;
     padding-left: -5px;
     padding-right: -5px;
-    font-size: 1em;
+    font-size: 0.9em;
+}
+
+.enroll-subscribe-button {
+    margin-left: 100px;
+    margin-top: -7px;
 }
 
 
@@ -253,12 +260,11 @@
 }
 
 .announcement-info p {
-    margin-top: 0.5em;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-top: 5px;
+    margin-left: 30px;
     color: #383838;
-    font-size: 1.1em;
-    line-height: 1.5em;
+    font-size: 1em;
+    line-height: 1.3em;
     text-decoration: none;
 }
 
