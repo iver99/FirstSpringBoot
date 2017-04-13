@@ -80,6 +80,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
                 }
 
+                self.renderTime = function(date){
+                    var da = new Date(date);
+                    return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
+                }
             };
 
             /**

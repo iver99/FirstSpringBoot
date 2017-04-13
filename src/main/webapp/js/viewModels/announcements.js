@@ -27,6 +27,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
             self.handleActivated = function (info) {
                 // Current announcement List
 
+               self.renderTime = function(date){
+                   var da = new Date(date);
+                   return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
+               }
+
                var announcementArray = new Array();
 
                $.ajax({

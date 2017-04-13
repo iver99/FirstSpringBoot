@@ -27,14 +27,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
              */
             self.handleActivated = function (info) {
 
+
+                self.renderTime = function(date){
+                    var da = new Date(date);
+                    return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
+                }
+
                  //Current Subscribed Activity List
                 var currentSubscribeActivityArray = new Array();
 
                 $.ajax({
-                    url: '/v1/mySubscribe',
+                    url: '/v1/mySubscribe/1',
                     async: false,
                     type : "GET",
-                    data : {"user_id": 1}
+//                    data : {"user_id": 1}
                     datatype: "json",
                     success: function (data) {
                         if(data.success == 1){
@@ -57,17 +63,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 self.unSubscribeActivity = function (item) {
                     //取消活动订阅
                     $.ajax({
-                        url: '/v1/mySubscribe',
+                        url: '/v1/mySubscribe?activityId='+item.id+'&userId=1',
                         async: false,
                         type : "DELETE",
                         data : {"user_id": 1, "activity_id":item.id},
                         datatype: "json",
                         success: function (data) {
                             if(data.success == 1){
-                                for(var i=0; i<data.object.length; i++){
-                                    currentSubscribeActivityArray = data.object[i];
-                                }
-//                                location.reload();
+                                location.reload();
                             }else {
                                 //TODO
                             }
@@ -76,6 +79,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
                     });
                 }
+
 
             };
 

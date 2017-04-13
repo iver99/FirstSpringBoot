@@ -25,6 +25,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
              * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
              * the promise is resolved
              */
+
+
+
             self.handleActivated = function (info) {
 
                 var currentActivityArray = new Array();
@@ -87,6 +90,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
 
 
+
                 // Subscribe a created activity
                 self.subscribeActivity = function (item) {
                     //活动订阅
@@ -107,6 +111,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
                         }
                     });
+                }
+
+
+                self.renderTime = function(date){
+                    var da = new Date(date);
+                    return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
                 }
 
             };
