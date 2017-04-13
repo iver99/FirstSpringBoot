@@ -26,67 +26,63 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
              */
             self.handleActivated = function (info) {
                 // Current announcement List
-                var announcementArray = [
-                    {
-                        "id": "001",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-04-04",
-                        "description": "This is announcement information, please click title to see more detail"
 
-    },
-                    {
-                        "id": "002",
-                        "title": "This is announcement title xxxx",
-                        "created_at": "2017-04-03",
-                        "description": "This is announcement information, please click title to see more detail"
-    },
-                    {
-                        "id": "003",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-04-02",
-                        "description": "This is announcement information, please click title to see more detail"
-    },
-                    {
-                        "id": "004",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-04-01",
-                        "description": "This is announcement information, please click title to see more detail"
-    },
-                    {
-                        "id": "005",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-03-31",
-                        "description": "This is announcement information, please click title to see more detail"
-    },
-                    {
-                        "id": "006",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-03-30",
-                        "description": "This is announcement information, please click title to see more detail"
-    },
-                    {
-                        "id": "007",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-03-30",
-                        "description": "This is announcement information, please click title to see more detail"
-    },
-                    {
-                        "id": "008",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-03-28",
-                        "description": "This is announcement information, please click title to see more detail"
-    }, {
-                        "id": "009",
-                        "title": "This is announcement title xxxxxxx",
-                        "created_at": "2017-03-27",
-                        "description": "This is announcement information, please click title to see more detail"
-    }
-];
-                var myAnnouncementArray = new Array();
+               self.renderTime = function(date){
+                   var da = new Date(date);
+                   return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
+               }
+
+               var announcementArray = new Array();
+
+               $.ajax({
+                    url: '/v1/announcement/',
+                    async: false,
+                    type : "GET",
+//                    data : {"userId": 1},
+                    datatype: "json",
+                    success: function (data) {
+                        if(data.success == 1){
+                            for(var i=0; i<data.object.length; i++){
+                                announcementArray.push(data.object[i]);
+                            }
+                        }else {
+                            //TODO
+                        }
+
+                    }
+                });
+//                var announcementArray = [
+//                    {
+//                        "id": "001",
+//                        "title": "通知",
+//                        "created_at": "2017-03-30",
+//                        "description": ""
+//
+//    },
+//                    {
+//                        "id": "002",
+//                        "title": "This is announcement title xxxx",
+//                        "created_at": "2017-04-03",
+//                        "description": "This is announcement information, please click title to see more detail"
+//    },
+//                    {
+//                        "id": "003",
+//                        "title": "This is announcement title xxxxxxx",
+//                        "created_at": "2017-04-02",
+//                        "description": "This is announcement information, please click title to see more detail"
+//    },
+//                    {
+//                        "id": "004",
+//                        "title": "This is announcement title xxxxxxx",
+//                        "created_at": "2017-04-01",
+//                        "description": "This is announcement information, please click title to see more detail"
+//    }
+//];
+//                var myAnnouncementArray = new Array();
 
 
-                var userId = $("#user_id").val();
-                console.log("userId is" + userId);
+//                var userId = $("#user_id").val();
+//                console.log("userId is" + userId);
                 //获取通知列表 公共的
 //                $.ajax({
 //                    url : '/v1/announcement',

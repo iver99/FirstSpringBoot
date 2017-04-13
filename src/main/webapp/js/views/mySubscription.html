@@ -19,14 +19,14 @@
                     </div>
                     <div class="date-grid oj-flex">
                         <div class=" oj-flex-item">
-                            <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                            <p data-bind="text: 'Publlish Time : '+$parent.renderTime(created_at)"></p>
                         </div>
                         <div class="oj-flex-item">
-                            <p data-bind="text: 'Start Time : ' + start_time">
+                            <p data-bind="text: 'Start Time : ' + $parent.renderTime(start_time)">
                             </p>
                         </div>
                         <div class="oj-flex-item">
-                            <p data-bind="text: 'End Time : ' + end_time">
+                            <p data-bind="text: 'End Time : ' + $parent.renderTime(end_time)">
                             </p>
                         </div>
                         <div class="oj-flex-item">

@@ -57,12 +57,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
 
             self.logout = function () {
                 window.location.href = "index.html";
-            }
+            };
 
-
-            self.gotoHomepage = function () {
+            $("#gotoHome").click(function(){
+//                alert("goto!");
                 window.location.href = "index.html";
-            }
+            });
+//            self.gotoHomepage = function () {
+//                window.location.href = "index.html";
+//            }
 
             // Drawer
             // Called by nav drawer option change events so we can close drawer after selection

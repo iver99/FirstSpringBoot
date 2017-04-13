@@ -29,257 +29,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
                 var userId = 1;
                 // My Activity List
-                                var myActivityArray = new Array();
+                var myActivityArray = new Array();
 
-                                $.ajax({
-                                    url: '/v1/myActivity/' + userId,
-                                    async: false,
-                                    type: "GET",
-                                    data: {
-                                        "userId": 1
-                                    },
-                                    datatype: "json",
-                                    success: function (data) {
-                                        if (data.success == 1) {
-                                            for (var i = 0; i < data.object.length; i++) {
-                                                currentActivityArray.push(data.object[i]);
-                                            }
-                                        } else {
-                                            //TODO
-                                        }
+                $.ajax({
+                    url: '/v1/myActivity/' + userId,
+                    async: false,
+                    type: "GET",
+                    data: {
+                        "userId": 1
+                    },
+                    datatype: "json",
+                    success: function (data) {
+                        if (data.success == 1) {
+                            for (var i = 0; i < data.object.length; i++) {
+                                myActivityArray.push(data.object[i]);
+                            }
+                        } else {
+                            //TODO
+                        }
 
-                                    }
-                                });
+                    }
+                });
 
 
-                // Test data source: Current Activity List
-//                var myActivityArray = [
-//                    {
-//                        "id": "001",
-//                        "title": "This is an long long long long activity title xxxxxxx",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-01",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/08/17 01:00 PM",
-//                        "end_time": "04/08/17 03:00 PM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "25",
-//                        "enrolled": "5"
-//                                    },
-//                    {
-//                        "id": "002",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "3"
-//                                    },
-//                    {
-//                        "id": "003",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "10",
-//                        "enrolled": "1"
-//                                    },
-//                    {
-//                        "id": "004",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "30",
-//                        "enrolled": "12"
-//                                    },
-//                    {
-//                        "id": "005",
-//                        "title": "This is an long long long long activity title xxxxxxx",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-01",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/08/17 01:00 PM",
-//                        "end_time": "04/08/17 03:00 PM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "6"
-//                                    },
-//                    {
-//                        "id": "006",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "18"
-//                                    },
-//                    {
-//                        "id": "007",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "8"
-//                                    },
-//                    {
-//                        "id": "008",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "1"
-//                                    },
-//                    {
-//                        "id": "009",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "12"
-//                                    },
-//                    {
-//                        "id": "010",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "10"
-//                                    },
-//                    {
-//                        "id": "011",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "1"
-//                                    },
-//                    {
-//                        "id": "012",
-//                        "title": "This is an long long long long activity title xxxxxxx",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-01",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/08/17 01:00 PM",
-//                        "end_time": "04/08/17 03:00 PM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "12"
-//                                    },
-//                    {
-//                        "id": "013",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "12"
-//                                    },
-//                    {
-//                        "id": "014",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "10"
-//                                    },
-//                    {
-//                        "id": "015",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 10:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing",
-//                        "manager": "Vivian",
-//                        "contact": "12345678912",
-//                        "capacity": "20",
-//                        "enrolled": "1"
-//                                    }
-//                                ];
 
                 self.myActivityCollection = new oj.Collection(myActivityArray);
 
@@ -292,7 +64,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 self.unenrollActivity = function (item) {
                     //取消报名
                     $.ajax({
-                        url: '/v1/myActivity/',
+                        url: '/v1/myActivity?activityId='+item.id+'&userId=1',
                         async: false,
                         type: "DELETE",
                         data: {
@@ -311,6 +83,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
                 }
 
+                self.renderTime = function(date){
+                    var da = new Date(date);
+                    return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
+                }
             };
 
             /**

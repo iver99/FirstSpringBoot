@@ -9,6 +9,7 @@
     </div>
     <input id="inputSearch" placeholder="Search..." data-bind="ojComponent: {
             component: 'ojInputSearch',
+            value:'',
             update: updateEventHandler,
             rootAttributes: {style:'max-width:20em'}}">
 
@@ -21,9 +22,10 @@
                         <div class="current-activit-title oj-flex-item">
                             <a href="#" data-bind="text: title, attr: {title: title}"></a>
                         </div>
+
                         <div class="date-grid oj-flex">
                             <div class=" oj-flex-item">
-                                <p data-bind="text: 'Created at : '+created_at"></p>
+                                <p data-bind="text: 'Created at : '+$parent.renderTime(created_at)"></p>
                             </div>
                             <div class="oj-flex-item">
                                 <p data-bind="text: 'Enrolled : ' + enrolled + '/' + capacity">

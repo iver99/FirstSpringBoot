@@ -12,56 +12,46 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
             var self = this;
 
+            /**
+             * Optional ViewModel method invoked when this ViewModel is about to be
+             * used for the View transition.  The application can put data fetch logic
+             * here that can return a Promise which will delay the handleAttached function
+             * call below until the Promise is resolved.
+             * @param {Object} info - An object with the following key-value pairs:
+             * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
+             * @param {Function} info.valueAccessor - The binding's value accessor.
+             * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
+             * the promise is resolved
+             */
+
+
+
             self.handleActivated = function (info) {
 
-                //                var currentActivityArray = new Array();
-                //
-                //                $.ajax({
-                //                    url: '/v1/activity',
-                //                    async: false,
-                //                    type: "GET",
-                //                    datatype: "json",
-                //                    success: function (data) {
-                //                        for (var i = 0; i < data.object.length; i++) {
-                //                            if (data.object[i].status == 1) {
-                //                                currentActivityArray.push(data.object[i]);
-                //                            }
-                //                        }
-                //
-                //                    }
-                //                });
-                var currentActivityArray = [
-                    {
-                        "id": "001",
-                        "title": "This is an long long long long activity title xxxxxxx",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-01",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/08/17 01:00 PM",
-                        "end_time": "04/08/17 03:00 PM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-                                    },
-                    {
-                        "id": "014",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-07",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/03/17 10:00 AM",
-                        "end_time": "05/03/17 11:00 AM",
-                        "activity_place": "Beijing",
-                        "manager": "Vivian",
-                        "contact": "12345678912",
-                        "capacity": "20",
-                        "enrolled": "12"
-                                    }
-                                ];
+                self.currentActivity = ko.observable();
+
+                var currentActivityArray = new Array();
+
+                $.ajax({
+                    url: '/v1/activity',
+                    async: false,
+                    type: "GET",
+                    datatype: "json",
+                    success: function (data) {
+                        for (var i = 0; i < data.object.length; i++) {
+//                            if(data.object[i].status == 1){
+                                currentActivityArray.push(data.object[i]);
+//                            }
+                        }
+
+                    }
+                });
+
+
+                self.currentActivity(currentActivityArray);
+
+
+
 
                 self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
                 self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
@@ -69,8 +59,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 // Enroll a created activity
                 self.enrollActivity = function (item) {
                     //活动报名
+                    var activityId = item.id;
                     $.ajax({
-                        url: '/v1/myActivity',
+                        url: '/v1/myActivity?userId=1&activityId=' + item.id,
                         async: false,
                         type: "POST",
                         data: {
@@ -81,35 +72,33 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         success: function (data) {
                             if (data.success == 1) {
                                 //todo
-                                $("#enrollBtn_id").css('color', '#a5aeb0');
-                                $("#enrollBtn_id").val("Enrolled");
-                            } else {
+//                                $("#enrollBtn_id_"+activityId).css('color', '#a5aeb0');
+//                                $("#enrollBtn_id_"+activityId).val("Enrolled");
+                            }else {
                                 //TODO
                             }
 
                         }
                     });
                 }
+
 
 
                 // Subscribe a created activity
                 self.subscribeActivity = function (item) {
                     //活动订阅
                     $.ajax({
-                        url: '/v1/mySubscribe',
+                        url: '/v1/subscribe?userId=1&activityId='+item.id,
                         async: false,
-                        type: "POST",
-                        data: {
-                            "userId": 1,
-                            "activityId": item.id
-                        },
+                        type : "PUT",
+                        data : {"userId": 1, "activityId": item.id},
                         datatype: "json",
                         success: function (data) {
                             if (data.success == 1) {
                                 //todo
-                                $("#enrollBtn_id").css('color', '#a5aeb0');
-                                $("#enrollBtn_id").value = "Subscribed"
-                            } else {
+//                                $("#enrollBtn_id").css('color', '#a5aeb0');
+//                                $("#enrollBtn_id").value = "Subscribed"
+                            }else {
                                 //TODO
                             }
 
@@ -117,9 +106,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     });
                 }
 
-                self.updateEventHandler = function (context, ui) {
-                    alert("updateEventHandler " + ui.value);
+
+
+                self.renderTime = function(date){
+                    var da = new Date(date);
+                    return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
                 }
+
+                self.updateEventHandler = function (context, ui) {
+
+                }
+
 
             };
 
