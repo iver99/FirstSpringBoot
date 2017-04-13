@@ -11,7 +11,7 @@ import java.util.Date;
 public class AnnouncementBean {
     private Long id;
     private String title;
-    @JsonSerialize(using = CustomDateSerializer.class)
+//    @JsonSerialize(using = CustomDateSerializer.class)
     private Date create_time;
     private Long create_id;
     private String description;

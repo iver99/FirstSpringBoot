@@ -11,12 +11,12 @@ import java.util.Date;
 public class ActivityBean {
     private Long id;
     private String title;
-    @JsonSerialize(using = CustomDateSerializer.class)
+//    @JsonSerialize(using = CustomDateSerializer.class)
     private Date created_at;
     private String description;
-    @JsonSerialize(using = CustomDateSerializer.class)
+//    @JsonSerialize(using = CustomDateSerializer.class)
     private Date start_time;
-    @JsonSerialize(using = CustomDateSerializer.class)
+//    @JsonSerialize(using = CustomDateSerializer.class)
     private Date end_time;
     private String activity_place;
     private String manager;

@@ -12,7 +12,7 @@ public class MyAnnouncementBean {
     private Long id;
     private Long announcement_id;
     private Long user_id;
-    @JsonSerialize(using = CustomDateSerializer.class)
+//    @JsonSerialize(using = CustomDateSerializer.class)
     private Date time;
     private String status;
 
