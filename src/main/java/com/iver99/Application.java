@@ -24,6 +24,7 @@ public class Application extends SpringBootServletInitializer {
         Object[] list=new Object[]{
                 Application.class,
                 AnnouncementAPI.class,
+                MyAnnouncementAPI.class,
                 TestAPI.class,
                 AuthAPI.class,
                 MyActivityAPI.class,
