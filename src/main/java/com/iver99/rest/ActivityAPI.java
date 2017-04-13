@@ -149,6 +149,7 @@ public class ActivityAPI {
         activity.setPublisher(activityBean.getPublisher());
         activity.setEnrolled(activity.getEnrolled());
         activity.setCreated_at(new Date());
+        activity.setImg(activityBean.getImg());
 
         activityDao.save(activity);
         return new MsgModel(null,"create activities success",true);
@@ -171,6 +172,7 @@ public class ActivityAPI {
         activityBean.setPublisher(activity.getPublisher());
         activityBean.setUpdate_time(activity.getUpdate_time());
         activityBean.setDescription(activity.getDescription());
+        activityBean.setImg(activity.getImg());
 
         return activityBean;
     }
