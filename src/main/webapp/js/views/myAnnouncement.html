@@ -14,10 +14,13 @@
                         <span title="Announcement" role="img" class="oj-fwk-icon-status-info oj-fwk-icon"></span>
                         <a type="button" href="#" data-bind="text: title, attr: {title: title}"></a>
                     </div>
-                    <div class=" announcement-time">
+                </div>
+                <div class="oj-flex">
+                    <div class="announcement-time" style="margin-left:30px; margin-top:5px">
                         <span title=".oj-fwk-icon-calendar-clock" role="img" class="oj-fwk-icon-calendar-clock oj-fwk-icon"></span>
                         <span class="" data-bind="text: $parent.renderTime(create_time)"></span>
                     </div>
+
                 </div>
                 <div class="announcement-info activity-description-text-overflow">
                     <p data-bind="text: description"></p>

@@ -5,14 +5,12 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource', 'ojs/ojbutton'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource', 'ojs/ojbutton', 'ojs/ojselectcombobox'],
     function (oj, ko, $) {
 
         function ActivitiesViewModel() {
 
             var self = this;
-            // Below are a subset of the ViewModel methods invoked by the ojModule binding
-            // Please reference the ojModule jsDoc for additionaly available methods.
 
             /**
              * Optional ViewModel method invoked when this ViewModel is about to be
@@ -61,11 +59,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     $.ajax({
                         url: '/v1/myActivity?userId=1&activityId=' + item.id,
                         async: false,
-                        type : "POST",
-                        data : {"userId": 1, "activityId": item.id},
+                        type: "POST",
+                        data: {
+                            "userId": 1,
+                            "activityId": item.id
+                        },
                         datatype: "json",
                         success: function (data) {
-                            if(data.success == 1){
+                            if (data.success == 1) {
                                 //todo
 //                                $("#enrollBtn_id_"+activityId).css('color', '#a5aeb0');
 //                                $("#enrollBtn_id_"+activityId).val("Enrolled");
@@ -76,18 +77,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         }
                     });
                 }
-//        function activityEnroll(btn) {
-//            if (click == 0) {
-//                btn.style.color = "#a5aeb0";
-//                btn.value = "Enrolled"
-//                click = 1;
-//            } else {
-//                btn.style.color = "rgb(29, 162, 193)";
-//                btn.value = "Enroll"
-//                click = 0;
-//            }
-//        }
-
 
 
 
@@ -101,7 +90,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         data : {"userId": 1, "activityId": item.id},
                         datatype: "json",
                         success: function (data) {
-                            if(data.success == 1){
+                            if (data.success == 1) {
                                 //todo
 //                                $("#enrollBtn_id").css('color', '#a5aeb0');
 //                                $("#enrollBtn_id").value = "Subscribed"
@@ -113,16 +102,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     });
                 }
 
-                // 搜索框搜索活动
-                self.searchActivity = function () {
-                    var searchString = f
-
-                }
 
 
                 self.renderTime = function(date){
                     var da = new Date(date);
                     return da.getFullYear()+"-"+ (da.getMonth()+1)+"-" +da.getDate();
+                }
+
+                self.updateEventHandler = function (context, ui) {
+                    alert("updateEventHandler " + ui.value);
                 }
 
             };

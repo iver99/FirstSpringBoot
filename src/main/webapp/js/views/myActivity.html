@@ -9,12 +9,13 @@
             <h3>Activity Enrolled</h3>
         </div>
         <div class="activities-container" style="position: relative;">
-<!--
-            <div id="listviewWrapper">
-                <ul id="listview" aria-label="list using collection" style="height:100%" data-bind="ojComponent: {component: 'ojListView', data: dataSource, item: {template: 'tweet_template'},  scrollPolicy: 'loadMoreOnScroll', scrollPolicyOptions: {fetchSize: 15}}">
+            <div id="listviewContainer">
+
+                <ul id="listview" aria-label="notes" data-bind="ojComponent: {component: 'ojListView', data: myActivityDataSource, scrollTop: scrollPos, item: {template: 'myActivity_template'}, rootAttributes: {style: 'width:100%;height:500px;overflow-x:hidden'}, scrollPolicy: 'loadMoreOnScroll', scrollPolicyOptions: {fetchSize: 5}}">
                 </ul>
             </div>
-            <script type="text/html" id="tweet_template">
+
+            <script type="text/html" id="myActivity_template">
                 <li class="selectable selected" data-bind="attr: { id: id }">
                     <div class="oj-flex" data-bind="click:$parent.openActivityDetail">
                         <div style="width:20%"><img style="width:80%" src="css/images/activity1.jpg" alt="" /></div>
@@ -22,12 +23,46 @@
                             <div class="current-activit-title oj-flex-item">
                                 <a href="#" data-bind="text: title, attr: {title: title}"></a>
                             </div>
-
                             <div class="date-grid oj-flex">
+                                <div class="oj-flex-item">
+                                    <span title=".oj-fwk-icon-calendar" role="img" style="font-size:1em" class="oj-fwk-icon-calendar oj-fwk-icon" data-bind="text: '&nbsp' + $parent.renderTime(created_at)"></span>
 
-                                <div class=" oj-flex-item">
-                                    <p data-bind="text: 'Publlish Time : '+created_at"></p>
                                 </div>
+                                <div class="oj-flex-item">
+                                    <span title=".demo-people-icon-24" role="img" style="font-size:1em" class="demo-people-icon-24 demo-icon-font-24" data-bind="text: '&nbsp' + enrolled + '/' + capacity"></span>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <input style="width:20%" class="common-button" type="button" data-bind="click: $parent.unenrollActivity,
+                ojComponent: {
+                  component: 'ojButton',
+                  label: 'Cancel'}" />
+                    </div>
+                </li>
+            </script>
+            <!--
+            <ul style='list-style-type:none' data-bind="foreach: currentActivityItems">
+                <li class="selectable selected" data-bind="attr: { id: id }">
+                    <div class="oj-flex" data-bind="click:$parent.openActivityDetail">
+                        <div style="width:20%"><img style="width:80%" src="css/images/activity1.jpg" alt="" /></div>
+                        <div style="width:60%">
+                            <div class="current-activit-title oj-flex-item">
+                                <a href="#" data-bind="text: title, attr: {title: title}"></a>
+                            </div>
+                            <div class="date-grid oj-flex">
+                                <div class="oj-flex-item">
+                                    <span title=".oj-fwk-icon-calendar" role="img" style="font-size:1em" class="oj-fwk-icon-calendar oj-fwk-icon" data-bind="text: '&nbsp' + created_at"></span>
+
+                                </div>
+                                <div class="oj-flex-item">
+                                    <span title=".demo-people-icon-24" role="img" style="font-size:1em" class="demo-people-icon-24 demo-icon-font-24" data-bind="text: '&nbsp' + enrolled + '/' + capacity"></span>
+
+
+                                </div>
+>>>>>>> aa0330d11e5716eed56016d7c8128afec577b0c4
 
                             </div>
                         </div>
@@ -37,40 +72,10 @@
                   component: 'ojButton',
                   label: 'Cancel'}" />
                     </div>
-
-
                 </li>
-            </script>
+            </ul>
 -->
-<ul style='list-style-type:none' data-bind="foreach: currentActivityItems">
-    <li class="selectable selected" data-bind="attr: { id: id }">
-
-        <div class="oj-flex" data-bind="click:$parent.openActivityDetail">
-            <div style="width:20%"><img style="width:80%" src="css/images/activity1.jpg" alt="" /></div>
-            <div style="width:60%">
-                <div class="current-activit-title oj-flex-item">
-                    <a href="#" data-bind="text: title, attr: {title: title}"></a>
-                </div>
-
-                <div class="date-grid oj-flex">
-
-                    <div class=" oj-flex-item">
-                        <p data-bind="text: 'Publlish Time : '+$parent.renderTime(created_at)"></p>
-                    </div>
-
-                </div>
-            </div>
-
-            <input style="width:20%" class="common-buton" type="button" data-bind="click: $parent.unenrollActivity,
-                ojComponent: {
-                  component: 'ojButton',
-                  label: 'Cancel'}" />
-        </div>
-
-
-    </li>
-</ul>
-<div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:currentActivityDataSource, pageSize:10}"></div>
+            <!--         <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:currentActivityDataSource, pageSize:10}"></div>-->
         </div>
 
     </div>
