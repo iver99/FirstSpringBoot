@@ -26,6 +26,7 @@ public class Application extends SpringBootServletInitializer {
                 AnnouncementAPI.class,
                 MyAnnouncementAPI.class,
                 TestAPI.class,
+                SubscribeAPI.class,
                 AuthAPI.class,
                 MyActivityAPI.class,
                 ActivityAPI.class

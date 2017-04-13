@@ -1,5 +1,8 @@
 package com.iver99.bean;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.iver99.util.CustomDateSerializer;
+
 import java.util.Date;
 
 /**
@@ -9,6 +12,7 @@ public class MyAnnouncementBean {
     private Long id;
     private Long announcement_id;
     private Long user_id;
+//    @JsonSerialize(using = CustomDateSerializer.class)
     private Date time;
     private String status;
 

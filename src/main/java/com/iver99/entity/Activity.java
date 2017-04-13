@@ -28,6 +28,15 @@ public class Activity {
     private Integer enrolled;
     private Date update_time;
     private String publisher;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public Long getId() {
         return id;
