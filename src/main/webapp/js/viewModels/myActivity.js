@@ -27,168 +27,56 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
              */
             self.handleActivated = function (info) {
 
-                // Current Activity List
-                //                                var currentActivityArray;
-                //
-                //                                $.ajax({
-                //                                    url: '/test/activities',
-                //                                    async: false,
-                //                                    type: "GET",
-                //                                    datatype: "json",
-                //                                    success: function (data) {
-                //                                        currentActivityArray = JSON.parse(data);
-                //                                    }
-                //                                });
+                var userId = 1;
+                // My Activity List
+                var currentActivityArray = new Array();
 
+                $.ajax({
+                    url: '/v1/myActivity/' + userId,
+                    async: false,
+                    type: "GET",
+                    data: {
+                        "userId": 1
+                    },
+                    datatype: "json",
+                    success: function (data) {
+                        if (data.success == 1) {
+                            for (var i = 0; i < data.object.length; i++) {
+                                currentActivityArray.push(data.object[i]);
+                            }
+                        } else {
+                            //TODO
+                        }
 
-                //=======
-                // Current Activity List
-                var currentActivityArray = [
-                    {
-                        "id": "001",
-                        "title": "This is an long long long long activity title xxxxxxx",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-01",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/08/17 01:00 PM",
-                        "end_time": "04/08/17 03:00 PM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "002",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-01",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/09/17 10:00 AM",
-                        "end_time": "04/09/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "003",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-02",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/10/17 10:00 AM",
-                        "end_time": "04/10/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "004",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-02",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/20/17 10:00 AM",
-                        "end_time": "04/20/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "005",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-03",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/23/17 10:00 AM",
-                        "end_time": "04/23/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "006",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-03",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "04/24/17 10:00 AM",
-                        "end_time": "04/24/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "007",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-04",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "008",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-04",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing"
-    }, {
-                        "id": "009",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-05",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing"
-    }
-];
-                //>>>>>>> iver99/greenchannel
-//                self.collection = new oj.Collection(currentActivityArray);
-//                self.currentActivityDataSource = new oj.CollectionTableDataSource(collection);
-//
-//                var root = $('#listview').ojListView('widget').get(0);
-//                oj.PullToRefreshUtils.setupPullToRefresh(root, function () {
-//                    var promise = new Promise(function (resolve, reject) {
-//                        var handler = function (event) {
-//                            if (event && event.data) {
-//                                // this timeout is just to simulate a delay so that
-//                                // the refresh panel does not close immediately
-//                                setTimeout(function () {
-//                                    resolve();
-//                                }, 2000);
-//                            } else {
-//                                reject();
-//                            }
-//                            currentActivityDataSource.off("sync", handler);
-//                            currentActivityDataSource.off("error", handler);
-//                        };
-//
-//                        // listens for data fetched after refresh
-//                        currentActivityDataSource.on("sync", handler);
-//                        currentActivityDataSource.on("error", reject);
-//                    });
-//
-//                    // calls reset to clear collection
-//                    // listview will fetch data from collection
-//                    collection.reset();
-//                    return promise;
-//                }, {
-//                    'primaryText': 'Primary Text',
-//                    'secondaryText': 'secondary text'
-//                });
-//
-//                $('#listview').on({
-//                    'ojdestroy': function () {
-//                        oj.PullToRefreshUtils.tearDownPullToRefresh('#listviewContainer');
-//                    }
-//                });
-                                self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
-                                self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
+                    }
+                });
+
+                self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
+                self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
+
 
                 // Unenroll a created activity
                 self.unenrollActivity = function (item) {
                     //取消报名
+                    $.ajax({
+                        url: '/v1/myActivity/',
+                        async: false,
+                        type: "DELETE",
+                        data: {
+                            "userId": 1,
+                            "activityId": item.id
+                        },
+                        datatype: "json",
+                        success: function (data) {
+                            if (data.success == 1) {
+                                location.reload();
+                            } else {
+                                //TODO
+                            }
+
+                        }
+
+                    });
 
                 }
 
