@@ -13,6 +13,10 @@ public interface MyActivityDao extends JpaRepository<MyActivity, Long> {
     @Query("select t from MyActivity t where t.user_id = ?1")
     public List<MyActivity> getActivitiesByUserId(Long userId);
 
+    //for delete
     @Query("select t from MyActivity t where t.user_id = ?1 and t.activity_id=?2")
     public List<MyActivity> getByUserIdAndActivityId(Long userId,Long activityId);
+
+    @Query("select t from MyActivity t where t.user_id = ?1 and is_subscribed =1")
+    public List<MyActivity> getSubscribed(Long userId);
 }

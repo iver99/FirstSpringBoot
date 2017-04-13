@@ -16,6 +16,15 @@ public class MyActivityBean {
     private Date register_time;
     private Integer status;
     private String activity_rating;
+    private Integer is_subscribed;
+
+    public Integer getIs_subscribed() {
+        return is_subscribed;
+    }
+
+    public void setIs_subscribed(Integer is_subscribed) {
+        this.is_subscribed = is_subscribed;
+    }
 
     public Long getId() {
         return id;

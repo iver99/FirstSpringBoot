@@ -20,6 +20,15 @@ public class MyActivity {
     private Date register_time;
     private Integer status;
     private String activity_rating;
+
+    public Integer getIs_subscribed() {
+        return is_subscribed;
+    }
+
+    public void setIs_subscribed(Integer is_subscribed) {
+        this.is_subscribed = is_subscribed;
+    }
+
     private Integer is_subscribed;
 
     public Long getId() {
