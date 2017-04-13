@@ -33,19 +33,19 @@ public class MyActivityAPI {
 
 
     @RequestMapping(value = "{userId}", method = RequestMethod.GET)
-    public Object getMyActivity(@PathVariable Long userId, Integer isSubscribed){
+    public Object getMyActivity(@PathVariable Long userId/*, Integer isSubscribed*/){
         if (userId == null || userId <= 0) {
             LOGGER.error("id cannot be null!");
             return new MsgModel(null, "Id is not correct", false);
         }
         List<MyActivity> myActivities =null;
-        if( isSubscribed != null && isSubscribed ==1){
+        /*if( isSubscribed != null && isSubscribed ==1){
             LOGGER.info("Retrieve user subscribed activities for user "+userId);
             myActivities = myActivityDao.getSubscribed(userId);
-        }else{
+        }else{*/
             LOGGER.info("Retrieve all user enrolled activities for user "+userId);
             myActivities = myActivityDao.getActivitiesByUserId(userId);
-        }
+//        }
         List<Long> idList = new ArrayList<>();
         if(myActivities !=null && !myActivities.isEmpty()){
             for(MyActivity myActivity : myActivities){

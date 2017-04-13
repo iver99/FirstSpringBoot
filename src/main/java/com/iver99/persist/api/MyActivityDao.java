@@ -10,6 +10,7 @@ import java.util.List;
  * Created by chehao on 2017/4/13 11:32.
  */
 public interface MyActivityDao extends JpaRepository<MyActivity, Long> {
+    //获取enroll, not subscribed
     @Query("select t from MyActivity t where t.user_id = ?1 and t.is_enrolled=1")
     public List<MyActivity> getActivitiesByUserId(Long userId);
 
