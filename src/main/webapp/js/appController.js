@@ -117,7 +117,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                             //todo 放到cookie 里保存用户登录状态
 
                             //TODO 刷新页面，获取最新的 活动 和 通知 列表
-                            location.reload();
+//                            location.reload();
 
                        }else {
                            //TODO 通知用户 用户名密码错误
@@ -160,7 +160,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                              //todo 放到cookie 里保存用户登录状态
 
                              //TODO 刷新页面，获取最新的 活动 和 通知 列表
-                             location.reload();
+//                             location.reload();
 
                         }else {
                             //TODO
@@ -177,7 +177,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                  //todo 把放到cookie 里的用户名ID去掉
 
                  //TODO 刷新页面，获取最新的 活动 和 通知 列表
-                 location.reload();
+//                 location.reload();
 
             });
 
