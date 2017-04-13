@@ -88,7 +88,99 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Application Name used in Branding Area
             self.appName = ko.observable("OCH Club");
             // User Info used in Global Navigation area
-            self.userLogin = ko.observable("yuanyuan.shen@oracle.com");
+            self.userLogin = ko.observable("");
+            $("#dropdownList_id").hide();
+            //login
+            $('#loginSubmitButon').click(function login(){
+
+                var userName = $('#username').val();
+                var password = $('#password').val();
+                var loginData = {"username":userName, "password":password}
+                if(userName.length < 6 || password.length < 6){
+                    alert("请输入有效的用户名密码！");
+                    return;
+                }
+
+                $.ajax({
+                    url : 'v1/userInfo',
+                    async : false,
+                    type : "GET",
+                    data : loginData,
+                    datatype : "json",
+                    success : function (data){
+                       if(data.success == 1){
+                            //TODO sign in label 去掉，添加用户名显示在页面
+                            $('#loginRegisterModal').modal('hide');
+                            $("#signin_id").hide();
+                            $("#dropdownList_id").show();
+                            self.userLogin(userName);
+                            //todo 放到cookie 里保存用户登录状态
+
+                            //TODO 刷新页面，获取最新的 活动 和 通知 列表
+//                            location.reload();
+
+                       }else {
+                           //TODO 通知用户 用户名密码错误
+                       }
+                    }
+                });
+
+
+            });
+
+           //register
+           $('#registerId').click(function register(){
+
+                var userName = $('#usernamesignup').val();
+                var email = $('#emailsignup').val();
+                var password = $('#passwordsignup').val();
+                var passwordConfirm = $('#passwordsignup_confirm').val();
+
+                //validation
+                if(userName == "" || email == "" || password == "" || passwordConfirm == ""){
+                    alert("不能有空值！");
+                    return;
+                }
+
+                var registerData = {"username":userName, "email":email, "password": password}
+                //register
+                $.ajax({
+                    url : '/v1/userInfo',
+                    async : false,
+                    type : "POST",
+                    data : registerData,
+                    datatype : "json",
+                    success : function (data){
+                       if(data.success == 1){
+                             //TODO sign in label 去掉，添加用户名显示在页面
+                             $('#loginRegisterModal').modal('hide');
+                             $("#signin_id").hide();
+                             $("#dropdownList_id").show();
+                             self.userLogin(userName);
+                             //todo 放到cookie 里保存用户登录状态
+
+                             //TODO 刷新页面，获取最新的 活动 和 通知 列表
+//                             location.reload();
+
+                        }else {
+                            //TODO
+                        }
+                    }
+                });
+            });
+
+            //Sign out
+            $("#out").click(function singOut(){
+                 $("#signin_id").show();
+                 self.userLogin("");
+                 $("#dropdownList_id").hide();
+                 //todo 把放到cookie 里的用户名ID去掉
+
+                 //TODO 刷新页面，获取最新的 活动 和 通知 列表
+//                 location.reload();
+
+            });
+
 
             // open login dialog
             //            self.loginClick = function () {
