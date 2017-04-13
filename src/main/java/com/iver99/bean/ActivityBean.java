@@ -1,5 +1,8 @@
 package com.iver99.bean;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.iver99.util.CustomDateSerializer;
+
 import java.util.Date;
 
 /**
@@ -8,9 +11,12 @@ import java.util.Date;
 public class ActivityBean {
     private Long id;
     private String title;
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date created_at;
     private String description;
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date start_time;
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date end_time;
     private String activity_place;
     private String manager;

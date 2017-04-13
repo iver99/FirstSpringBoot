@@ -20,6 +20,7 @@ public class MyActivity {
     private Date register_time;
     private Integer status;
     private String activity_rating;
+    private Integer is_subscribed;
 
     public Long getId() {
         return id;
