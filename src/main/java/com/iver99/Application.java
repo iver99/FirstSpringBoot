@@ -1,6 +1,8 @@
 package com.iver99;
 
 import com.iver99.rest.ActivityAPI;
+import com.iver99.rest.AnnouncementAPI;
+import com.iver99.rest.AuthAPI;
 import com.iver99.rest.TestAPI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +26,9 @@ public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) throws Exception {
         Object[] list=new Object[]{
                 Application.class,
+                AnnouncementAPI.class,
                 TestAPI.class,
+                AuthAPI.class,
                 ActivityAPI.class
         };
         SpringApplication.run(list, args);

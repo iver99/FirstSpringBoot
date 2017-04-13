@@ -162,7 +162,7 @@ public class ActivityAPI {
         activityBean.setPublisher(activity.getPublisher());
         activityBean.setUpdate_time(activity.getUpdate_time());
         activityBean.setDescription(activity.getDescription());
-        
+
         return activityBean;
     }
 

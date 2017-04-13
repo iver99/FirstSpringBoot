@@ -201,9 +201,9 @@
                         <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
                         <h1 class="oj-web-applayout-header-title application-name" title="Application Name" data-bind="text: appName"></h1>
                     </div>
-                    <a class="text-bold site-header-link" data-toggle="modal" href="#loginRegisterModal">Sign in</a>
+                    <a id="signin_id" class="text-bold site-header-link" data-toggle="modal" href="#loginRegisterModal">Sign in</a>
 
-                    <div class="oj-flex-bar-end">
+                    <div id="dropdownList_id" class="oj-flex-bar-end">
                         <!-- Responsive Toolbar -->
                         <div data-bind="ojComponent: {component:'ojToolbar'}">
                             <button id="userMenu" data-bind="ojComponent: {component: 'ojButton', label: userLogin,
@@ -220,6 +220,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
                     <div data-bind="ojComponent: {component: 'ojNavigationList',
               navigationLevel: 'application',
