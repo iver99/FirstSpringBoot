@@ -182,6 +182,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             });
 
 
+            // goto user center
+            self.userMenuItemSelect = function (event, ui) {
+                var selectItem = ui.item.children("a").text();
+                if (selectItem == "My Activity") {
+                    window.location.href = "userCenter.html";
+                } else if (selectItem == "My Subscription") {
+                    window.location.href = "userCenter.html?root=mySubscription";
+                } else if (selectItem == "My Announcement") {
+                    window.location.href = "userCenter.html?root=myAnnouncement";
+                }
+
+            };
+
             // open login dialog
             //            self.loginClick = function () {
             //                $("#loginDialog").ojDialog("open");
