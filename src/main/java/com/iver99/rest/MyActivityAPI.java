@@ -70,6 +70,34 @@ public class MyActivityAPI {
         }
         return new MsgModel(null, "get user's activity list failed!", false);
 
+    }
 
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public Object deleteMyActivity(Long userId,Long activityId){
+        LOGGER.info("Service to call DELETE my activity");
+        List<MyActivity> myActivity = myActivityDao.getByUserIdAndActivityId(userId,activityId);
+        Long myActivityId = null;
+        if(myActivity!=null && !myActivity.isEmpty()){
+            MyActivity myActivity1 = myActivity.get(0);
+            myActivityId = myActivity1.getId();
+        }
+        if(myActivityId !=null){
+            myActivityDao.delete(myActivityId);
+        }
+        return new MsgModel(null,"delete my activity succcess", true);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Object addUserActivity(Long userId, Long activityId){
+        LOGGER.info("user id is "+ userId+ " activity id is "+activityId) ;
+        MyActivity myActivity = new MyActivity();
+        myActivity.setStatus(1);
+        myActivity.setActivity_id(activityId);
+        myActivity.setUser_id(userId);
+        myActivityDao.save(myActivity);
+        LOGGER.info("Service to call add user activity");
+        return new MsgModel(myActivity, "add user activity success", true);
     }
 }
