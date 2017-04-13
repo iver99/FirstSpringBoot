@@ -201,23 +201,26 @@
                     <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
                     <h1 class="oj-web-applayout-header-title application-name" title="Application Name" data-bind="text: appName"></h1>
                 </div>
-                <a class="text-bold site-header-link" data-toggle="modal" href="#loginRegisterModal">Sign in</a>
+                <a id="signin_id" class="text-bold site-header-link" data-toggle="modal" href="#loginRegisterModal">Sign in</a>
+                <!--<label id="signin_username_id"></label>-->
+                <!--<a id="signout_id" class="text-bold site-header-link" hidden>Sign Out</a>-->
+                <!--<label id="userIdFromServer" type="text" hidden> </label>-->
 
-                <!--<div class="oj-flex-bar-end">-->
-                    <!--&lt;!&ndash; Responsive Toolbar &ndash;&gt;-->
-                    <!--<div data-bind="ojComponent: {component:'ojToolbar'}">-->
-                        <!--<button id="userMenu" data-bind="ojComponent: {component: 'ojButton', label: userLogin,-->
-                  <!--display: smScreen() ? 'icons' : 'all',-->
-                  <!--icons: smScreen() ? {start: 'oj-icon demo-appheader-avatar', end: null} : {end: 'oj-component-icon oj-button-menu-dropdown-icon'},-->
-                  <!--chroming: 'half', menu: '#menu1'}">-->
-                        <!--</button>-->
-                        <!--<ul id='menu1' data-bind="ojComponent: {component: 'ojMenu'}" style="display:none">-->
-                            <!--<li id="userCenter"><a href="#">User Center</a></li>-->
-                            <!--<li id="myActivities"><a href="#">My Activities</a></li>-->
-                            <!--<li id="out"><a href="#">Sign Out</a></li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="oj-flex-bar-end" id="dropdownList_id">
+                    <!-- Responsive Toolbar -->
+                    <div data-bind="ojComponent: {component:'ojToolbar'}">
+                        <button id="userMenu" data-bind="ojComponent: {component: 'ojButton', label: userLogin,
+                  display: smScreen() ? 'icons' : 'all',
+                  icons: smScreen() ? {start: 'oj-icon demo-appheader-avatar', end: null} : {end: 'oj-component-icon oj-button-menu-dropdown-icon'},
+                  chroming: 'half', menu: '#menu1'}">
+                        </button>
+                        <ul id='menu1' data-bind="ojComponent: {component: 'ojMenu'}" style="display:none">
+                            <li id="userCenter"><a href="#">User Center</a></li>
+                            <li id="myActivities"><a href="#">My Activities</a></li>
+                            <li id="out"><a href="#">Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
                 <div data-bind="ojComponent: {component: 'ojNavigationList',

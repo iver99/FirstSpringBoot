@@ -27,165 +27,48 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
              */
             self.handleActivated = function (info) {
 
-                // Current Activity List
-                var currentActivityArray ;
+
+                var currentActivityArray = new Array();
+                var myActivityArray = new Array();
+                var finishedActivityArray = new Array();
 
                 $.ajax({
-                    url : '/test/activities',
+                    url : '/v1/activity',
                     async : false,
                     type : "GET",
                     datatype : "json",
                     success : function (data){
-                        currentActivityArray = JSON.parse(data);
+                        for(var i=0; i<data.object.length; i++){
+                            // finished 状态
+                            if(data.object[i].status == 2){
+                                finishedActivityArray.push(data.object[i]);
+                            } else{
+                                currentActivityArray.push(data.object[i]);
+                            }
+                        }
+
+                    }
+                });
+
+                var userId = 1;  //todo 改成活的
+                // my activities
+                $.ajax({
+                    url : '',
+                    async : false,
+                    type : "GET",
+                    data: userId,
+                    datatype : "json",
+                    success : function (data){
+
+                        for(var i=0; i<data.object.length; i++){
+                             myActivityArray.push(data.object[i]);
+                        }
+
                     }
                 });
 
 
-//=======
-//                // Current Activity List
-//                var currentActivityArray = [
-//                    {
-//                        "id": "001",
-//                        "title": "This is an long long long long activity title xxxxxxx",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-01",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/08/17 01:00 PM",
-//                        "end_time": "04/08/17 03:00 PM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "002",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-01",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/09/17 10:00 AM",
-//                        "end_time": "04/09/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "003",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-02",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/10/17 10:00 AM",
-//                        "end_time": "04/10/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "004",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-02",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/20/17 10:00 AM",
-//                        "end_time": "04/20/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "005",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-03",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/23/17 10:00 AM",
-//                        "end_time": "04/23/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "006",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-03",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "04/24/17 10:00 AM",
-//                        "end_time": "04/24/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "007",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-04",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/01/17 10:00 AM",
-//                        "end_time": "05/01/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "008",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-04",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/01/17 10:00 AM",
-//                        "end_time": "05/01/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    }, {
-//                        "id": "009",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-05",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/01/17 10:00 AM",
-//                        "end_time": "05/01/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "010",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-05",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/01/17 10:00 AM",
-//                        "end_time": "05/01/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "011",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-06",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/01/17 10:00 AM",
-//                        "end_time": "05/01/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "012",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-06",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/03/17 09:00 AM",
-//                        "end_time": "05/03/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
-//                    {
-//                        "id": "013",
-//                        "title": "This is an activity title",
-//                        "publisher": "Admin",
-//                        "status": "1",
-//                        "created_at": "2017-04-07",
-//                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-//                        "start_time": "05/01/17 10:00 AM",
-//                        "end_time": "05/01/17 11:00 AM",
-//                        "activity_place": "Beijing"
-//    },
+
 //                    {
 //                        "id": "014",
 //                        "title": "This is an activity title",
@@ -197,8 +80,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 //                        "end_time": "05/03/17 11:00 AM",
 //                        "activity_place": "Beijing"
 //    }
-//];
-//>>>>>>> iver99/greenchannel
+
                 self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
                 self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
 
