@@ -1,9 +1,6 @@
 package com.iver99;
 
-import com.iver99.rest.ActivityAPI;
-import com.iver99.rest.AnnouncementAPI;
-import com.iver99.rest.AuthAPI;
-import com.iver99.rest.TestAPI;
+import com.iver99.rest.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -29,6 +26,7 @@ public class Application extends SpringBootServletInitializer {
                 AnnouncementAPI.class,
                 TestAPI.class,
                 AuthAPI.class,
+                MyActivityAPI.class,
                 ActivityAPI.class
         };
         SpringApplication.run(list, args);

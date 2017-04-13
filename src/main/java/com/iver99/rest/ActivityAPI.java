@@ -146,6 +146,7 @@ public class ActivityAPI {
         return new MsgModel(null,"create activities success",true);
     }
 
+
     private ActivityBean getActivityBean(Activity activity) {
         ActivityBean activityBean = new ActivityBean();
         activityBean.setId(activity.getId());
