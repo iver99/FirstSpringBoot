@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,19 +33,19 @@ public class MyActivityAPI {
 
 
     @RequestMapping(value = "{userId}", method = RequestMethod.GET)
-    public Object getMyActivity(@PathVariable Long userId, Integer isSubscribed){
+    public Object getMyActivity(@PathVariable Long userId/*, Integer isSubscribed*/){
         if (userId == null || userId <= 0) {
             LOGGER.error("id cannot be null!");
             return new MsgModel(null, "Id is not correct", false);
         }
         List<MyActivity> myActivities =null;
-        if( isSubscribed != null && isSubscribed ==1){
+        /*if( isSubscribed != null && isSubscribed ==1){
             LOGGER.info("Retrieve user subscribed activities for user "+userId);
             myActivities = myActivityDao.getSubscribed(userId);
-        }else{
-            LOGGER.info("Retrieve all user activities for user "+userId);
+        }else{*/
+            LOGGER.info("Retrieve all user enrolled activities for user "+userId);
             myActivities = myActivityDao.getActivitiesByUserId(userId);
-        }
+//        }
         List<Long> idList = new ArrayList<>();
         if(myActivities !=null && !myActivities.isEmpty()){
             for(MyActivity myActivity : myActivities){
@@ -89,13 +90,23 @@ public class MyActivityAPI {
         LOGGER.info("my activity size is "+myActivity.size());
         Long myActivityId = null;
         if(myActivity!=null && !myActivity.isEmpty()){
-            MyActivity myActivity1 = myActivity.get(0);
-            myActivityId = myActivity1.getId();
-        }
-        if(myActivityId !=null){
-            LOGGER.info("delete id is "+myActivityId);
-            myActivityDao.delete(myActivityId);
+            for(MyActivity  myActivity1: myActivity){
+                myActivity1.setIs_enrolled(0);
+                myActivityDao.save(myActivity1);
+            }
+//            MyActivity myActivity1 = myActivity.get(0);
+//            myActivityId = myActivity1.getId();
             return new MsgModel(null,"delete my activity succcess", true);
+        }else{
+            LOGGER.info("new My activity is created!");
+            MyActivity myActivity1 = new MyActivity();
+            myActivity1.setIs_enrolled(1);
+            myActivity1.setIs_subscribed(0);
+            myActivity1.setUser_id(userId);
+            myActivity1.setRegister_time(new Date());
+            myActivity1.setStatus(1);
+            myActivity1.setActivity_id(activityId);
+            myActivityDao.save(myActivity1);
         }
         LOGGER.info("delete id is null!");
         return  new MsgModel(null,"delete my activity fail", false);
@@ -104,13 +115,22 @@ public class MyActivityAPI {
     @RequestMapping(method = RequestMethod.POST)
     public Object addUserActivity(Long userId, Long activityId){
         LOGGER.info("user id is "+ userId+ " activity id is "+activityId) ;
-        MyActivity myActivity = new MyActivity();
-        myActivity.setStatus(1);
-        myActivity.setActivity_id(activityId);
-        myActivity.setUser_id(userId);
-        myActivity.setIs_subscribed(0);
-        myActivityDao.save(myActivity);
+        List<MyActivity> myActivities = myActivityDao.getByUserIdAndActivityId(userId,activityId);
+        if(myActivities !=null && !myActivities.isEmpty()){
+            for(MyActivity myActivity : myActivities){
+                myActivity.setIs_enrolled(1);
+                myActivityDao.save(myActivity);
+            }
+        }else{
+
+            MyActivity myActivity = new MyActivity();
+            myActivity.setStatus(1);
+            myActivity.setActivity_id(activityId);
+            myActivity.setUser_id(userId);
+            myActivity.setIs_subscribed(0);
+            myActivityDao.save(myActivity);
+        }
         LOGGER.info("Service to call add user activity");
-        return new MsgModel(myActivity, "add user activity success", true);
+        return new MsgModel(null, "add user activity success", true);
     }
 }

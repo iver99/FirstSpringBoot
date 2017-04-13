@@ -17,6 +17,15 @@ public class MyActivityBean {
     private Integer status;
     private String activity_rating;
     private Integer is_subscribed;
+    private Integer is_enrolled;
+
+    public Integer getIs_enrolled() {
+        return is_enrolled;
+    }
+
+    public void setIs_enrolled(Integer is_enrolled) {
+        this.is_enrolled = is_enrolled;
+    }
 
     public Integer getIs_subscribed() {
         return is_subscribed;
