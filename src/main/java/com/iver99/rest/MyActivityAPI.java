@@ -30,13 +30,21 @@ public class MyActivityAPI {
     @Autowired
     ActivityDao activityDao;
 
+
     @RequestMapping(value = "{userId}", method = RequestMethod.GET)
-    public Object getMyActivity(@PathVariable Long userId){
+    public Object getMyActivity(@PathVariable Long userId, Integer isSubscribed){
         if (userId == null || userId <= 0) {
             LOGGER.error("id cannot be null!");
             return new MsgModel(null, "Id is not correct", false);
         }
-        List<MyActivity> myActivities = myActivityDao.getActivitiesByUserId(userId);
+        List<MyActivity> myActivities =null;
+        if( isSubscribed != null && isSubscribed ==1){
+            LOGGER.info("Retrieve user subscribed activities for user "+userId);
+            myActivities = myActivityDao.getSubscribed(userId);
+        }else{
+            LOGGER.info("Retrieve all user activities for user "+userId);
+            myActivities = myActivityDao.getActivitiesByUserId(userId);
+        }
         List<Long> idList = new ArrayList<>();
         if(myActivities !=null && !myActivities.isEmpty()){
             for(MyActivity myActivity : myActivities){
@@ -44,7 +52,8 @@ public class MyActivityAPI {
             }
             LOGGER.info("Get my activities id list is "+idList);
         }
-        List<Activity> activities=activityDao.findAll(idList);
+        List<Activity> activities= null;
+        activities=activityDao.findAll(idList);
         List<ActivityBean> activityBeanList = new ArrayList<>();
         ActivityBean activityBean = null;
         if(activities !=null && !activities.isEmpty()){
@@ -99,6 +108,7 @@ public class MyActivityAPI {
         myActivity.setStatus(1);
         myActivity.setActivity_id(activityId);
         myActivity.setUser_id(userId);
+        myActivity.setIs_subscribed(0);
         myActivityDao.save(myActivity);
         LOGGER.info("Service to call add user activity");
         return new MsgModel(myActivity, "add user activity success", true);
