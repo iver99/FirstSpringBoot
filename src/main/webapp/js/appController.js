@@ -6,7 +6,7 @@
  * Your application specific code will go here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas', 'ojs/ojdialog'],
+  'ojs/ojoffcanvas', 'ojs/ojdialog', 'ojs/ojselectcombobox'],
     function (oj, ko) {
         function ControllerViewModel() {
             var self = this;
@@ -20,10 +20,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Router setup
             self.router = oj.Router.rootInstance;
             self.router.configure({
-//                'hotActivities': {
-     //                    label: 'Hot Activities',
-     //                    isDefault: true
-     //                },
+                //                'hotActivities': {
+                //                    label: 'Hot Activities',
+                //                    isDefault: true
+                //                },
                 'activities': {
                     label: 'Activities',
                     isDefault: true
@@ -92,24 +92,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             self.userLogin = ko.observable("");
             $("#dropdownList_id").hide();
             //login
-            $('#loginSubmitButon').click(function login(){
+            $('#loginSubmitButon').click(function login() {
 
                 var userName = $('#username').val();
                 var password = $('#password').val();
-                var loginData = {"username":userName, "password":password}
-                if(userName.length < 3 || password.length < 3){
+                var loginData = {
+                    "username": userName,
+                    "password": password
+                }
+                if (userName.length < 3 || password.length < 3) {
                     alert("请输入有效的用户名密码！");
                     return;
                 }
 
                 $.ajax({
-                    url : 'v1/userInfo',
-                    async : false,
-                    type : "GET",
-                    data : loginData,
-                    datatype : "json",
-                    success : function (data){
-                       if(data.success == 1){
+                    url: 'v1/userInfo',
+                    async: false,
+                    type: "GET",
+                    data: loginData,
+                    datatype: "json",
+                    success: function (data) {
+                        if (data.success == 1) {
                             //TODO sign in label 去掉，添加用户名显示在页面
                             $('#loginRegisterModal').modal('hide');
                             $("#signin_id").hide();
@@ -118,19 +121,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                             //todo 放到cookie 里保存用户登录状态
 
                             //TODO 刷新页面，获取最新的 活动 和 通知 列表
-//                            location.reload();
+                            //                            location.reload();
 
-                       }else {
-                           //TODO 通知用户 用户名密码错误
-                       }
+                        } else {
+                            //TODO 通知用户 用户名密码错误
+                        }
                     }
                 });
 
 
             });
 
-           //register
-           $('#registerId').click(function register(){
+            //register
+            $('#registerId').click(function register() {
 
                 var userName = $('#usernamesignup').val();
                 var email = $('#emailsignup').val();
@@ -138,32 +141,36 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                 var passwordConfirm = $('#passwordsignup_confirm').val();
 
                 //validation
-                if(userName == "" || email == "" || password == "" || passwordConfirm == ""){
+                if (userName == "" || email == "" || password == "" || passwordConfirm == "") {
                     alert("不能有空值！");
                     return;
                 }
 
-                var registerData = {"username":userName, "email":email, "password": password}
+                var registerData = {
+                    "username": userName,
+                    "email": email,
+                    "password": password
+                }
                 //register
                 $.ajax({
-                    url : '/v1/userInfo',
-                    async : false,
-                    type : "POST",
-                    data : registerData,
-                    datatype : "json",
-                    success : function (data){
-                       if(data.success == 1){
-                             //TODO sign in label 去掉，添加用户名显示在页面
-                             $('#loginRegisterModal').modal('hide');
-                             $("#signin_id").hide();
-                             $("#dropdownList_id").show();
-                             self.userLogin(userName);
-                             //todo 放到cookie 里保存用户登录状态
+                    url: '/v1/userInfo',
+                    async: false,
+                    type: "POST",
+                    data: registerData,
+                    datatype: "json",
+                    success: function (data) {
+                        if (data.success == 1) {
+                            //TODO sign in label 去掉，添加用户名显示在页面
+                            $('#loginRegisterModal').modal('hide');
+                            $("#signin_id").hide();
+                            $("#dropdownList_id").show();
+                            self.userLogin(userName);
+                            //todo 放到cookie 里保存用户登录状态
 
-                             //TODO 刷新页面，获取最新的 活动 和 通知 列表
-//                             location.reload();
+                            //TODO 刷新页面，获取最新的 活动 和 通知 列表
+                            //                             location.reload();
 
-                        }else {
+                        } else {
                             //TODO
                         }
                     }
@@ -171,14 +178,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             });
 
             //Sign out
-            $("#out").click(function singOut(){
-                 $("#signin_id").show();
-                 self.userLogin("");
-                 $("#dropdownList_id").hide();
-                 //todo 把放到cookie 里的用户名ID去掉
+            $("#out").click(function singOut() {
+                $("#signin_id").show();
+                self.userLogin("");
+                $("#dropdownList_id").hide();
+                //todo 把放到cookie 里的用户名ID去掉
 
-                 //TODO 刷新页面，获取最新的 活动 和 通知 列表
-//                 location.reload();
+                //TODO 刷新页面，获取最新的 活动 和 通知 列表
+                //                 location.reload();
 
             });
 

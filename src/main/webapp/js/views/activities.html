@@ -4,53 +4,48 @@
  -->
 
 <div class="oj-hybrid-padding">
-    <div>
-        <div class="activities-heading">
-            <h3>Activity List</h3>
-        </div>
-        <div class="activities-container" style="position: relative;">
-            <ul style='list-style-type:none' data-bind="foreach: currentActivityItems">
-                <li class="selectable selected" data-bind="attr: { id: id }">
-                    <div class="oj-flex">
+    <div class="activities-heading">
+        <h3>Activity List</h3>
+    </div>
+    <input id="inputSearch" placeholder="Search..." data-bind="ojComponent: {
+            component: 'ojInputSearch',
+            update: updateEventHandler,
+            rootAttributes: {style:'max-width:20em'}}">
+
+    <div class="activities-container" style="position: relative;">
+        <ul style='list-style-type:none' data-bind="foreach: currentActivityItems">
+            <li class="selectable selected" data-bind="attr: { id: id }">
+                <div class="oj-flex" data-bind="click:$parent.openActivityDetail">
+                    <div style="width:20%"><img style="width:80%" src="css/images/activity1.jpg" alt="" /></div>
+                    <div style="width:80%">
                         <div class="current-activit-title oj-flex-item">
                             <a href="#" data-bind="text: title, attr: {title: title}"></a>
                         </div>
-                        <!--                                    <input class="enroll-button" type="button" value="Enroll" onclick="activityEnroll(this)" />-->
-                    </div>
-                    <div class="date-grid oj-flex">
-                        <div class=" oj-flex-item">
-                            <p data-bind="text: 'Publlish Time : '+created_at"></p>
+                        <div class="date-grid oj-flex">
+                            <div class=" oj-flex-item">
+                                <p data-bind="text: 'Created at : '+created_at"></p>
+                            </div>
+                            <div class="oj-flex-item">
+                                <p data-bind="text: 'Enrolled : ' + enrolled + '/' + capacity">
+                                </p>
+                            </div>
                         </div>
-                        <div class="oj-flex-item">
-                            <p data-bind="text: 'Start Time : ' + start_time">
-                            </p>
-                        </div>
-                        <div class="oj-flex-item">
-                            <p data-bind="text: 'End Time : ' + end_time">
-                            </p>
-                        </div>
-                        <div class="oj-flex-item">
-                            <p data-bind="text: 'Activity Place : ' + activity_place">
-                            </p>
-                        </div>
-                    </div>
-                    <div class="activity-description activity-description-text-overflow">
-                        <a title="Click to see activity detail" data-bind="text: description"></a>
-                    </div>
-                    <input id="enrollBtn_id" class="bottom-edit-button" type="button" data-bind="click: $parent.enrollActivity,
+                        <div class="date-grid oj-flex enroll-subscribe-button">
+                            <input class="oj-flex-item" style="margin-right:20px" type="button" data-bind="click: $parent.enrollActivity,
                 ojComponent: {
                   component: 'ojButton',
                   label: 'Enroll'}" />
-
-                    <input class="bottom-edit-button" type="button" data-bind="click: $parent.subscribeActivity,
+                            <input class="oj-flex-item" type="button" data-bind="click: $parent.subscribeActivity,
                 ojComponent: {
                   component: 'ojButton',
                   label: 'Subscribe'}" />
-                </li>
-            </ul>
-            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:currentActivityDataSource, pageSize:10}"></div>
-        </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
 
-
+        </ul>
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:currentActivityDataSource, pageSize:10}"></div>
     </div>
+
 </div>
