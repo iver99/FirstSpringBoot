@@ -6,7 +6,7 @@
  * Your application specific code will go here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas', 'ojs/ojdialog', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata'],
+  'ojs/ojoffcanvas', 'ojs/ojdialog', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojButton'],
     function (oj, ko) {
         function AdminControllerViewModel() {
             var self = this;

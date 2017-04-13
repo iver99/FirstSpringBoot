@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource', 'ojs/ojbutton'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource', 'ojs/ojbutton', 'hammerjs', 'ojs/ojjquery-hammer', 'promise', 'ojs/ojpulltorefresh', 'ojs/ojlistview', 'ojs/ojdatacollection-common', 'ojs/ojmodel'],
     function (oj, ko, $) {
 
         function MyActivitiesViewModel() {
@@ -34,28 +34,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 $.ajax({
                     url: '/v1/myActivity/' + userId,
                     async: false,
-                    type : "GET",
-                    data : {"userId": 1},
+                    type: "GET",
+                    data: {
+                        "userId": 1
+                    },
                     datatype: "json",
                     success: function (data) {
-                        if(data.success == 1){
-                            for(var i=0; i<data.object.length; i++){
+                        if (data.success == 1) {
+                            for (var i = 0; i < data.object.length; i++) {
                                 currentActivityArray.push(data.object[i]);
                             }
-                        }else {
+                        } else {
                             //TODO
                         }
 
                     }
                 });
 
-
-
-
-
-
                 self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
                 self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
+
 
                 // Unenroll a created activity
                 self.unenrollActivity = function (item) {
@@ -63,13 +61,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     $.ajax({
                         url: '/v1/myActivity/',
                         async: false,
-                        type : "DELETE",
-                        data : {"userId":1, "activityId":item.id},
+                        type: "DELETE",
+                        data: {
+                            "userId": 1,
+                            "activityId": item.id
+                        },
                         datatype: "json",
                         success: function (data) {
-                            if(data.success == 1){
+                            if (data.success == 1) {
                                 location.reload();
-                            }else {
+                            } else {
                                 //TODO
                             }
 
