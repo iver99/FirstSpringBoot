@@ -27,7 +27,7 @@
 <html lang="en-us">
 
 <head>
-    <title>Oracle OCH Club</title>
+    <title>Oracle Club - User Center</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,22 +50,6 @@
 
     <!-- This is bootstrap css file -->
     <link rel="stylesheet" href="css/libs/bootstrap/bootstrap.css" type="text/css" />
-
-    <script type="text/javascript">
-        var click = 0;
-
-        function activityEnroll(btn) {
-            if (click == 0) {
-                btn.style.color = "#a5aeb0";
-                btn.value = "Enrolled"
-                click = 1;
-            } else {
-                btn.style.color = "rgb(29, 162, 193)";
-                btn.value = "Enroll"
-                click = 0;
-            }
-        }
-    </script>
 
 </head>
 
@@ -107,86 +91,6 @@
        ** and the CSS documentation under Support/API Docs/Non-Component Styling
        ** on the JET website for more information on how to use this pattern.
     -->
-            <!-- Login 模态框（Modal） -->
-            <div class="modal fade" id="loginRegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
-                    <div id="wrapper" class="modal-content">
-                        <div id="login" class="animate form">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                &times;
-                            </button>
-                                <h1>Log in</h1>
-                            </div>
-
-                            <form action="" autocomplete="on">
-                                <p>
-                                    <label for="username" class="uname" data-icon="u"> Your email or username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
-                                </p>
-                                <p>
-                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p class="keeplogin">
-                                    <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-                                    <label for="loginkeeping">Keep me logged in</label>
-                                </p>
-                                <p class="login button">
-                                    <input id="loginSubmitButon" type="button" value="Login" />
-                                </p>
-                                <p class="change_link">
-                                    <a style="margin-right:20px" href="adminLogin.html">Admin Entrance</a>
-                                    <span>Not a member yet ?
-                                    <a href="#toregister" class="to_register">Join us</a></span>
-                                </p>
-                                <!--
-                            <p class="">
-
-                                <a href="" class="to_register">Admin Entrance</a>
-                            </p>
--->
-                            </form>
-                        </div>
-
-                        <div id="register" class="animate form">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                &times;
-                            </button>
-                                <h1>Sign up</h1>
-                            </div>
-                            <form action="" autocomplete="on">
-                                <p>
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
-                                </p>
-                                <p>
-                                    <label for="emailsignup" class="youmail" data-icon="e"> Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com" />
-                                </p>
-                                <p>
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p>
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p class="signin button">
-                                    <input id="registerId" type="button" value="Sign up" />
-                                </p>
-                                <p class="change_link">
-                                    Already a member ?
-                                    <a href="#tologin" class="to_register"> Go and log in </a>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <header role="banner" class="oj-web-applayout-header customer-header">
                 <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
@@ -201,7 +105,6 @@
                         <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
                         <h1 class="oj-web-applayout-header-title application-name" title="Application Name" data-bind="text: appName"></h1>
                     </div>
-                    <a class="text-bold site-header-link" data-toggle="modal" href="#loginRegisterModal">Sign in</a>
 
                     <div class="oj-flex-bar-end">
                         <!-- Responsive Toolbar -->
@@ -211,11 +114,8 @@
                   icons: smScreen() ? {start: 'oj-icon demo-appheader-avatar', end: null} : {end: 'oj-component-icon oj-button-menu-dropdown-icon'},
                   chroming: 'half', menu: '#menu1'}">
                         </button>
-                            <ul id='menu1' data-bind="ojComponent: {component: 'ojMenu',select: userMenuItemSelect}" style="display:none">
-                                <li id="userCenter"><a href="#">My Activity</a></li>
-                                <li id="myActivities"><a href="#">My Subscription</a></li>
-                                <li id="myActivities"><a href="#">My Announcement</a></li>
-                                <li id="out"><a href="#">Sign Out</a></li>
+                            <ul id='menu1' data-bind="ojComponent: {component: 'ojMenu'}" style="display:none">
+                                <li id="out"><a href="" data-bind="click:logout">Sign Out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -248,7 +148,7 @@
     </div>
 
     <script type="text/javascript" src="js/libs/require/require.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/userMain.js"></script>
 
 </body>
 

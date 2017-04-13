@@ -28,21 +28,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
             self.handleActivated = function (info) {
 
                 // Current Activity List
-                var currentActivityArray ;
+                                var currentActivityArray;
 
-                $.ajax({
-                    url : '/test/activities',
-                    async : false,
-                    type : "GET",
-                    datatype : "json",
-                    success : function (data){
-                        currentActivityArray = JSON.parse(data);
-                    }
-                });
+                                $.ajax({
+                                    url: '/test/activities',
+                                    async: false,
+                                    type: "GET",
+                                    datatype: "json",
+                                    success: function (data) {
+                                        currentActivityArray = JSON.parse(data);
+                                    }
+                                });
 
 
-//=======
-//                // Current Activity List
+                //=======
+                // Current Activity List
 //                var currentActivityArray = [
 //                    {
 //                        "id": "001",
@@ -198,9 +198,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 //                        "activity_place": "Beijing"
 //    }
 //];
-//>>>>>>> iver99/greenchannel
+                //>>>>>>> iver99/greenchannel
                 self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
                 self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
+
+                // Enroll a created activity
+                self.enrollActivity = function (item) {
+                    //活动报名
+                }
+
+                // Subscribe a created activity
+                self.subscribeActivity = function (item) {
+                    //活动订阅
+                }
 
 
                 // History Activity List
@@ -399,11 +409,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
          * each time the view is displayed.  Return an instance of the ViewModel if
          * only one instance of the ViewModel is needed.
          */
-         //                $.get("/test/activities", function (data) {
-         //                    alert("GETRestfulTest调用成功，返回值为：" + data);
-         //                      currentActivityArray = data;
-         //                });
+        //                $.get("/test/activities", function (data) {
+        //                    alert("GETRestfulTest调用成功，返回值为：" + data);
+        //                      currentActivityArray = data;
+        //                });
         return new ActivitiesViewModel();
     }
 );
-

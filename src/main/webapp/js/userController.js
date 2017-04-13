@@ -20,18 +20,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Router setup
             self.router = oj.Router.rootInstance;
             self.router.configure({
-                'hotActivities': {
-                    label: 'Hot Activities',
+                'myActivity': {
+                    label: 'My Activity',
                     isDefault: true
                 },
-                'activities': {
-                    label: 'Activities'
+                'mySubscription': {
+                    label: 'My Subscription'
                 },
-                'announcements': {
-                    label: 'Announcements'
-                },
-                'feedback': {
-                    label: 'Feedback'
+                'myAnnouncement': {
+                    label: 'My Announcement'
                 }
             });
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -39,29 +36,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Navigation setup
             var navData = [
                 {
-                    name: 'Hot Activities',
-                    id: 'hotActivities',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'
-                },
-                {
-                    name: 'Activities',
-                    id: 'activities',
+                    name: 'My Activity',
+                    id: 'myActivity',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-catalog-icon-24'
                 },
                 {
-                    name: 'Announcements',
-                    id: 'announcements',
+                    name: 'My Subscription',
+                    id: 'mySubscription',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'
                 },
                 {
-                    name: 'Feedback',
-                    id: 'feedback',
+                    name: 'My Announcement',
+                    id: 'myAnnouncement',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-edit-icon-24'
                 }
       ];
             self.navDataSource = new oj.ArrayTableDataSource(navData, {
                 idAttribute: 'id'
             });
+
+            self.logout = function () {
+                alert("log out!");
+            }
+
+            self.gotoTab = function (tabId) {
+                self.router.go(tabId);
+            }
 
             // Drawer
             // Called by nav drawer option change events so we can close drawer after selection
@@ -86,32 +86,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
 
             // Header
             // Application Name used in Branding Area
-            self.appName = ko.observable("OCH Club");
+            self.appName = ko.observable("User Center");
             // User Info used in Global Navigation area
             self.userLogin = ko.observable("yuanyuan.shen@oracle.com");
-
-            // goto user center
-            self.userMenuItemSelect = function (event, ui) {
-                var selectItem = ui.item.children("a").text();
-                if (selectItem == "My Activity") {
-                    window.location.href = "userCenter.html";
-                } else if (selectItem == "My Subscription") {
-                    window.location.href = "userCenter.html?root=mySubscription";
-                } else if (selectItem == "My Announcement") {
-                    window.location.href = "userCenter.html?root=myAnnouncement";
-                }
-
-            };
-
-            // open login dialog
-            //            self.loginClick = function () {
-            //                $("#loginDialog").ojDialog("open");
-            //                return true;
-            //            }
-            // close login dialog
-            //            self.loginSuccess = function () {
-            //                $("#loginRegisterModal").style.display = 'none';
-            //            }
 
 
             // Footer
