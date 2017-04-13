@@ -105,11 +105,18 @@
                         <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
                         <h1 class="oj-web-applayout-header-title application-name" title="Application Name" data-bind="text: appName"></h1>
                     </div>
-
+                    <div>
+                        <button data-bind="click: gotoHomepage, ojComponent: {component:'ojButton', 
+                        chroming: 'half',
+                                           display: 'icons', 
+          icons: {start:'demo-icon-font demo-home-icon-24'},
+          lable:'Home'}">
+                        </button>
+                    </div>
                     <div class="oj-flex-bar-end">
                         <!-- Responsive Toolbar -->
                         <div data-bind="ojComponent: {component:'ojToolbar'}">
-                            <button id="userMenu" data-bind="ojComponent: {component: 'ojButton', label: userLogin,
+                            <button id="userMenu" data-bind=" ojComponent: {component: 'ojButton', label: userLogin,
                   display: smScreen() ? 'icons' : 'all',
                   icons: smScreen() ? {start: 'oj-icon demo-appheader-avatar', end: null} : {end: 'oj-component-icon oj-button-menu-dropdown-icon'},
                   chroming: 'half', menu: '#menu1'}">

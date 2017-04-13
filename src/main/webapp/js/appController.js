@@ -20,12 +20,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Router setup
             self.router = oj.Router.rootInstance;
             self.router.configure({
-                'hotActivities': {
-                    label: 'Hot Activities',
-                    isDefault: true
-                },
+//                'hotActivities': {
+     //                    label: 'Hot Activities',
+     //                    isDefault: true
+     //                },
                 'activities': {
-                    label: 'Activities'
+                    label: 'Activities',
+                    isDefault: true
                 },
                 'announcements': {
                     label: 'Announcements'
@@ -38,11 +39,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
 
             // Navigation setup
             var navData = [
-                {
-                    name: 'Hot Activities',
-                    id: 'hotActivities',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'
-                },
+//                {
+//                    name: 'Hot Activities',
+//                    id: 'hotActivities',
+//                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'
+//                },
                 {
                     name: 'Activities',
                     id: 'activities',
