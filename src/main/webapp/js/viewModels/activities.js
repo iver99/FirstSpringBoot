@@ -54,6 +54,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 // Enroll a created activity
                 self.enrollActivity = function (item) {
                     //活动报名
+                    var activityId = item.id;
                     $.ajax({
                         url: '/v1/myActivity',
                         async: false,
@@ -63,8 +64,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         success: function (data) {
                             if(data.success == 1){
                                 //todo
-                                $("#enrollBtn_id").css('color', '#a5aeb0');
-                                $("#enrollBtn_id").val("Enrolled");
+//                                $("#enrollBtn_id_"+activityId).css('color', '#a5aeb0');
+//                                $("#enrollBtn_id_"+activityId).val("Enrolled");
                             }else {
                                 //TODO
                             }
@@ -98,8 +99,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         success: function (data) {
                             if(data.success == 1){
                                 //todo
-                                $("#enrollBtn_id").css('color', '#a5aeb0');
-                                $("#enrollBtn_id").value = "Subscribed"
+//                                $("#enrollBtn_id").css('color', '#a5aeb0');
+//                                $("#enrollBtn_id").value = "Subscribed"
                             }else {
                                 //TODO
                             }

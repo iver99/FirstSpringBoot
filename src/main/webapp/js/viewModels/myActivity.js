@@ -61,7 +61,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 self.unenrollActivity = function (item) {
                     //取消报名
                     $.ajax({
-                        url: '/v1/myActivity/',
+                        url: '/v1/myActivity?activityId='+item.id+'&userId=1',
                         async: false,
                         type : "DELETE",
                         data : {"userId":1, "activityId":item.id},

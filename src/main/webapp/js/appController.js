@@ -88,8 +88,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             // Application Name used in Branding Area
             self.appName = ko.observable("OCH Club");
             // User Info used in Global Navigation area
-            self.userLogin = ko.observable("");
-            $("#dropdownList_id").hide();
+            self.userLogin = ko.observable("yuanyuan.shen@oracle.com");
+//            $("#dropdownList_id").hide();
             //login
             $('#loginSubmitButon').click(function login(){
 
