@@ -70,6 +70,26 @@ public class MyActivityAPI {
         }
         return new MsgModel(null, "get user's activity list failed!", false);
 
+    }
 
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public Object deleteMyActivity(@PathVariable Long id){
+        LOGGER.info("Service to call DELETE my activity");
+        myActivityDao.delete(id);
+        return new MsgModel(null,"delete my activity succcess", true);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Object addUserActivity(Long userId, Long activityId){
+        LOGGER.info("user id is "+ userId+ " activity id is "+activityId) ;
+        MyActivity myActivity = new MyActivity();
+        myActivity.setStatus(1);
+        myActivity.setActivity_id(activityId);
+        myActivity.setUser_id(userId);
+        myActivityDao.save(myActivity);
+        LOGGER.info("Service to call add user activity");
+        return new MsgModel(myActivity, "add user activity success", true);
     }
 }
