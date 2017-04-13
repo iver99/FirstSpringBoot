@@ -96,7 +96,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                 var userName = $('#username').val();
                 var password = $('#password').val();
                 var loginData = {"username":userName, "password":password}
-                if(userName.length < 6 || password.length < 6){
+                if(userName.length < 3 || password.length < 3){
                     alert("请输入有效的用户名密码！");
                     return;
                 }
