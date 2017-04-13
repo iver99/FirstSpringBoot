@@ -37,7 +37,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 var currentSubscribeActivityArray = new Array();
 
                 $.ajax({
-                    url: '/v1/myActivity/1?isSubscribed=1',
+                    url: '/v1/subscribe/1',
                     async: false,
                     type : "GET",
 //                    data : {"user_id": 1}
