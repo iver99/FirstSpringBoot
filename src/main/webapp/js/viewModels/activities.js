@@ -28,6 +28,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
             self.handleActivated = function (info) {
 
+                self.currentActivity = ko.observable();
+
                 var currentActivityArray = new Array();
 
                 $.ajax({
@@ -45,6 +47,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     }
                 });
 
+
+                self.currentActivity(currentActivityArray);
 
 
 
@@ -110,8 +114,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 }
 
                 self.updateEventHandler = function (context, ui) {
-                    alert("updateEventHandler " + ui.value);
+
                 }
+
 
             };
 
