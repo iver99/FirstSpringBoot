@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Created by chehao on 2017/3/28 10:28.
  */
@@ -29,13 +31,26 @@ public class AuthAPI {
            LOGGER.warn("UserName or Password cannot be empty!");
            return new MsgModel(null,"UserName or Password cannot be empty!",false);
        }
-        UserInfo userInfo = userInfoDao.checkLogin(userInfoBean.getUsername(), userInfoBean.getPassword());
-        if(userInfo!=null){
+        List<UserInfo> userInfos = userInfoDao.checkLogin(userInfoBean.getUsername(), userInfoBean.getPassword());
+        if(userInfos!=null){
             LOGGER.info("Login success!");
-            return new MsgModel(userInfo.getUsername(),"Login succcess",true);
+            return new MsgModel(userInfos.get(0).getUsername(),"Login succcess",true);
         }
         return new MsgModel(null,"Login failed!",false);
 
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Object register(UserInfoBean userInfoBean){
+        if(StringUtils.isEmpty(userInfoBean.getPassword()) || StringUtils.isEmpty(userInfoBean.getUsername())){
+            LOGGER.warn("UserName or Password cannot be empty!");
+            return new MsgModel(null,"UserName or Password cannot be empty!",false);
+        }
+        UserInfo userInfo  = new UserInfo();
+        userInfo.setPassword(userInfoBean.getPassword());
+        userInfo.setUsername(userInfoBean.getUsername());
+        userInfoDao.save(userInfo);
+        return new MsgModel(userInfoBean.getUsername(), "register success",true);
     }
 
 }
