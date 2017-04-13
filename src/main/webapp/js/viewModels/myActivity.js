@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource', 'ojs/ojbutton'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojarraypagingdatasource', 'ojs/ojbutton', 'hammerjs', 'ojs/ojjquery-hammer', 'promise', 'ojs/ojpulltorefresh', 'ojs/ojlistview', 'ojs/ojdatacollection-common', 'ojs/ojmodel'],
     function (oj, ko, $) {
 
         function MyActivitiesViewModel() {
@@ -141,66 +141,50 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         "start_time": "05/01/17 10:00 AM",
                         "end_time": "05/01/17 11:00 AM",
                         "activity_place": "Beijing"
-    },
-                    {
-                        "id": "010",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-05",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "011",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-06",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "012",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-06",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/03/17 09:00 AM",
-                        "end_time": "05/03/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "013",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-07",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/01/17 10:00 AM",
-                        "end_time": "05/01/17 11:00 AM",
-                        "activity_place": "Beijing"
-    },
-                    {
-                        "id": "014",
-                        "title": "This is an activity title",
-                        "publisher": "Admin",
-                        "status": "1",
-                        "created_at": "2017-04-07",
-                        "description": "This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.",
-                        "start_time": "05/03/17 10:00 AM",
-                        "end_time": "05/03/17 11:00 AM",
-                        "activity_place": "Beijing"
     }
 ];
                 //>>>>>>> iver99/greenchannel
-                self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
-                self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
+//                self.collection = new oj.Collection(currentActivityArray);
+//                self.currentActivityDataSource = new oj.CollectionTableDataSource(collection);
+//
+//                var root = $('#listview').ojListView('widget').get(0);
+//                oj.PullToRefreshUtils.setupPullToRefresh(root, function () {
+//                    var promise = new Promise(function (resolve, reject) {
+//                        var handler = function (event) {
+//                            if (event && event.data) {
+//                                // this timeout is just to simulate a delay so that
+//                                // the refresh panel does not close immediately
+//                                setTimeout(function () {
+//                                    resolve();
+//                                }, 2000);
+//                            } else {
+//                                reject();
+//                            }
+//                            currentActivityDataSource.off("sync", handler);
+//                            currentActivityDataSource.off("error", handler);
+//                        };
+//
+//                        // listens for data fetched after refresh
+//                        currentActivityDataSource.on("sync", handler);
+//                        currentActivityDataSource.on("error", reject);
+//                    });
+//
+//                    // calls reset to clear collection
+//                    // listview will fetch data from collection
+//                    collection.reset();
+//                    return promise;
+//                }, {
+//                    'primaryText': 'Primary Text',
+//                    'secondaryText': 'secondary text'
+//                });
+//
+//                $('#listview').on({
+//                    'ojdestroy': function () {
+//                        oj.PullToRefreshUtils.tearDownPullToRefresh('#listviewContainer');
+//                    }
+//                });
+                                self.currentActivityDataSource = new oj.ArrayPagingDataSource(currentActivityArray);
+                                self.currentActivityItems = self.currentActivityDataSource.getWindowObservable();
 
                 // Unenroll a created activity
                 self.unenrollActivity = function (item) {

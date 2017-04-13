@@ -6,7 +6,7 @@
  * Your application specific code will go here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas', 'ojs/ojdialog'],
+  'ojs/ojoffcanvas', 'ojs/ojdialog', 'ojs/ojbutton'],
     function (oj, ko) {
         function ControllerViewModel() {
             var self = this;
@@ -43,12 +43,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
                 {
                     name: 'My Subscription',
                     id: 'mySubscription',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'
+                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-bookmark-icon-16'
                 },
                 {
                     name: 'My Announcement',
                     id: 'myAnnouncement',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-edit-icon-24'
+                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'
                 }
       ];
             self.navDataSource = new oj.ArrayTableDataSource(navData, {
@@ -56,11 +56,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojknockout', 'o
             });
 
             self.logout = function () {
-                alert("log out!");
+                window.location.href = "index.html";
             }
 
-            self.gotoTab = function (tabId) {
-                self.router.go(tabId);
+
+            self.gotoHomepage = function () {
+                window.location.href = "index.html";
             }
 
             // Drawer
