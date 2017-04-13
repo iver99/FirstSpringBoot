@@ -4,6 +4,7 @@ import com.iver99.entity.Announcement;
 import com.iver99.entity.MyAnnouncement;
 import com.iver99.model.MsgModel;
 import com.iver99.persist.api.AnnouncementDao;
+import com.iver99.persist.api.MyActivityDao;
 import com.iver99.persist.api.MyAnnouncementDao;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -28,6 +29,8 @@ public class MyAnnouncementAPI {
     MyAnnouncementDao myAnnouncementDao;
     @Autowired
     AnnouncementDao announcementDao;
+    @Autowired
+    MyActivityDao myActivityDao;
 
     @RequestMapping(value = "{userId}", method = RequestMethod.GET)
     public Object getAnnouncementByUserId(@PathVariable Long userId){
@@ -35,10 +38,22 @@ public class MyAnnouncementAPI {
             LOGGER.error("id cannot be null!");
             return new MsgModel(null, "Id is not correct", false);
         }
-
-        List<MyAnnouncement> myAnnouncementList = new ArrayList<>();
-        myAnnouncementList = myAnnouncementDao.getMyAnnoucementByUserId(userId);
-        List<Long> idList = new ArrayList<>();
+        List<Long> activityIdList = myActivityDao.getSubscribedOrEnrolledActivity(userId);
+        String ids = "";
+        if(activityIdList !=null && !activityIdList.isEmpty()){
+            for(int i = 0; i <activityIdList.size();i++){
+                if(i==activityIdList.size()-1){
+                    ids+=activityIdList.get(i);
+                    continue;
+                }
+                ids+=activityIdList.get(i)+",";
+            }
+        }
+        LOGGER.info("ids is "+ids);
+        List<Announcement> announcementList = announcementDao.getUserAnnouncement(activityIdList);
+//        List<MyAnnouncement> myAnnouncementList = new ArrayList<>();
+//        myAnnouncementList = myAnnouncementDao.getMyAnnoucementByUserId(userId);
+        /*ist<Long> idList = new ArrayList<>();
         if(myAnnouncementList!=null && !myAnnouncementList.isEmpty()){
             for(MyAnnouncement myAnnouncement:myAnnouncementList){
                 idList.add(myAnnouncement.getAnnouncement_id());
@@ -48,10 +63,10 @@ public class MyAnnouncementAPI {
         if(!idList.isEmpty()){
             announcementList = announcementDao.findAll(idList);
             LOGGER.info("Retrieved my announcement size is "+announcementList.size());
-            return new MsgModel(announcementList,"get user announcement list success",true);
-        }
+        }*/
+        return new MsgModel(announcementList,"get user announcement list success",true);
 
-        return new MsgModel(null,"get My activity by user id failed", false);
+//        return new MsgModel(null,"get My activity by user id failed", false);
 
     }
 

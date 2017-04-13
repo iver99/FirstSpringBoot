@@ -20,4 +20,7 @@ public interface MyActivityDao extends JpaRepository<MyActivity, Long> {
 
     @Query("select t from MyActivity t where t.user_id = ?1 and is_subscribed =1")
     public List<MyActivity> getSubscribed(Long userId);
+
+    @Query("select t.activity_id from MyActivity t where t.user_id =?1 and is_subscribed =1 or is_enrolled =1")
+    public List<Long> getSubscribedOrEnrolledActivity(Long userId);
 }
