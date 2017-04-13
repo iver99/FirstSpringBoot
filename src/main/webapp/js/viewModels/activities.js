@@ -59,7 +59,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     //活动报名
                     var activityId = item.id;
                     $.ajax({
-                        url: '/v1/myActivity',
+                        url: '/v1/myActivity?userId=1&activityId=' + item.id,
                         async: false,
                         type : "POST",
                         data : {"userId": 1, "activityId": item.id},
