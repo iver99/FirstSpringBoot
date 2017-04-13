@@ -25,7 +25,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
              * the promise is resolved
              */
             self.handleActivated = function (info) {
-                // Current Activity List 
+                // Current announcement List
                 var announcementArray = [
                     {
                         "id": "001",
@@ -82,6 +82,48 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                         "description": "This is announcement information, please click title to see more detail"
     }
 ];
+                var myAnnouncementArray = new Array();
+
+
+                var userId = $("#user_id").val();
+                console.log("userId is" + userId);
+                //获取通知列表 公共的
+//                $.ajax({
+//                    url : '/v1/announcement',
+//                    async : false,
+//                    type : "GET",
+//                    datatype : "json",
+//                    success : function (data){
+//                        if(data.success == 1){
+//                            for(var i=0; i<data.object.length; i++){
+//                                announcementArray.push(data.object[i]);
+//                            }
+//                        }else{
+//                            //TODO 错误通知
+//                            console.log("get announcement failed" + data.msg);
+//                        }
+//
+//                    }
+//                });
+
+//                $.ajax({
+//                    url : '/v1/announcement',
+//                    async : false,
+//                    type : "GET",
+//                    datatype : "json",
+//                    success : function (data){
+//                        if(data.success == 1){
+//                            for(var i=0; i<data.object.length; i++){
+//                                announcementArray.push(data.object[i]);
+//                            }
+//                        }else{
+//                            //TODO 错误通知
+//                            console.log("get announcement failed" + data.msg);
+//                        }
+//
+//                    }
+//                });
+
                 self.announcementDataSource = new oj.ArrayPagingDataSource(announcementArray);
                 self.announcementItems = self.announcementDataSource.getWindowObservable();
             };

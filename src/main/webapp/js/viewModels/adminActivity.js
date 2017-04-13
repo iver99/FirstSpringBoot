@@ -91,11 +91,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                             console.log(result.object.length);
 //                            alert(result.object[0].status + result.object[0])
                             for(var i=0; i<result.object.length; i++) {
-//                                if(result.object[i].status == 0) {
+                                if(result.object[i].status == 0) {
                                     createdActivityArray.push(result.object[i]);
-//                                }else{
-//                                    publishedActivityArray.push(result.object[i]);
-//                                }
+                                }else{
+                                    publishedActivityArray.push(result.object[i]);
+                                }
                             }
 
                         }
@@ -122,7 +122,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
 
                 // editor 里 发布活动
                 self.activityPublish = function (data, event) {
-                    alert("Publish an activity!");
+                    console("Publish an activity!");
                     var createTime = new Date().format('MM/dd/yyyy hh:mm');
                     // 区分editor 是 新建的活动 还是 edit 按钮上来的活动
                     if(currentEditId == -1){  // edit 编辑已有的活动并发布
@@ -147,7 +147,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                             url : '/v1/activity/' + currentEditId,
                             async : false,
                             type : "PUT",
-                            data: JSON.stringify(publishActivityData),
+                            data: publishActivityData,
                             datatype : "json",
                             success : function (result){
                                 // failed
@@ -222,7 +222,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                             url : '/v1/activity',
                             async : false,
                             type : "POST",
-                            data: JSON.stringify(createActivityData),
+                            data: createActivityData,
                             datatype : "json",
                             success : function (result){
                                 // failed
@@ -334,18 +334,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
 
                 // Publish a created activity
                 self.publishActivity = function (item) {
-                    alert(item.id);
+//                    alert(item.id);
                     var createdActivityData =
                     {
                         "id" : item.id,
-                        "update_time" : new Date().format('MM/dd/yyyy hh:mm')
+                        "status" : 1
+//                        "update_time" : new Date().format('MM/dd/yyyy hh:mm')
                     };
-                    alert("Publish a activity" + JSON.stringify(createdActivityData));
+                    console.log("Publish a activity" + JSON.stringify(createdActivityData));
                     $.ajax({
-                        url : 'v1/activity/'+id,
+                        url : 'v1/activity/'+item.id,
                         async : false,
                         type : "PUT",
-                        data: JSON.stringify(createdActivityData),
+                        data: createdActivityData,
                         datatype : "json",
                         success : function (result){
                             // failed
@@ -357,6 +358,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout-validation',
                             }
                         }
                     });
+                    return true;
                 }
 
                 // Delete a published activity

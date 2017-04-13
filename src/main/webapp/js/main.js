@@ -76,78 +76,101 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'ojs/ojknockout',
             }
 
             //register
-            $('#registerId').click(function register(){
+//            $('#registerId').click(function register(){
+//
+//                var userName = $('#usernamesignup').val();
+//                var email = $('#emailsignup').val();
+//                var password = $('#passwordsignup').val();
+//                var passwordConfirm = $('#passwordsignup_confirm').val();
+//
+//                //validation
+//                if(userName == "" || email == "" || password == "" || passwordConfirm == ""){
+//                    alert("不能有空值！");
+//                    return;
+//                }
+//                // TODO 校验的话，考虑添加友好的界面，暂不管
+////                if(userName.length < 6){
+////                    alert("用户名长度不得小于6个字符，请重新输入！");
+////                    $('#usernamesignup').val("");
+////                    return;
+////                }
+////                if(password != passwordConfirm) {
+////                    alert("两次输入的密码不同，请重新输入！");
+////                    $('#passwordsignup').val("");
+////                    $('#passwordsignup_confirm').val("");
+////                    return;
+////                }
+////                if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
+////                   alert("邮箱格式错误，请重新输入！");
+////                   $('#emailsignup').val("");
+////                   return;
+////                }
+////                if(password.length < 6) {
+////                    alert("密码长度需大于6位，请重新输入密码！");
+////                    $('#passwordsignup').val("");
+////                    $('#passwordsignup_confirm').val("");
+////                    return;
+////                }
+//
+//                var registerData = {"userName":userName, "email":email, "password": password}
+//                //register
+//                $.ajax({
+//                    url : '/v1/register',
+//                    async : false,
+//                    type : "POST",
+//                    data : registerData,
+//                    datatype : "json",
+//                    success : function (data){
+//                        if(data.success == 1){
+//                            //TODO sign in label 去掉，添加用户名显示在页面，并把用户ID存好
+//                            $('#loginRegisterModal').modal('hide');
+//                        }else {
+//                            // nothing to do ..
+//                        }
+//                    }
+//                });
+//            });
 
-                var userName = $('#usernamesignup').val();
-                var email = $('#emailsignup').val();
-                var password = $('#passwordsignup').val();
-                var passwordConfirm = $('#passwordsignup_confirm').val();
-
-                //validation
-                if(userName == "" || email == "" || password == "" || passwordConfirm == ""){
-                    alert("不能有空值！");
-                    return;
-                }
-                if(userName.length < 6){
-                    alert("用户名长度不得小于6个字符，请重新输入！");
-                    $('#usernamesignup').val("");
-                    return;
-                }
-                if(password != passwordConfirm) {
-                    alert("两次输入的密码不同，请重新输入！");
-                    $('#passwordsignup').val("");
-                    $('#passwordsignup_confirm').val("");
-                    return;
-                }
-                if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
-                   alert("邮箱格式错误，请重新输入！");
-                   $('#emailsignup').val("");
-                   return;
-                }
-                if(password.length < 6) {
-                    alert("密码长度需大于6位，请重新输入密码！");
-                    $('#passwordsignup').val("");
-                    $('#passwordsignup_confirm').val("");
-                    return;
-                }
-                var registerData = {"userName":userName, "email":email, "password": password}
-                //register
-                $.ajax({
-                    url : '/test/register',
-                    async : false,
-                    type : "POST",
-                    data : registerData,
-                    datatype : "json",
-                    success : function (data){
-                        alert("register success!" + data);
-                        $('#loginRegisterModal').modal('hide');
-                    }
-                });
-            });
-
-            //login
-            $('#loginSubmitButon').click(function login(){
-
-                var userName = $('#username').val();
-                var password = $('#password').val();
-                var loginData = {"userName":userName, "password":password}
-                if(userName.length < 6 || password.length < 6){
-                    alert("请输入有效的用户名密码！");
-                    return;
-                }
-                $.ajax({
-                    url : '/test/login',
-                    async : false,
-                    type : "POST",
-                    data : loginData,
-                    datatype : "json",
-                    success : function (data){
-                        alert("login success!" + data);
-                        $('#loginRegisterModal').modal('hide');
-                        //TODO 增加登录后的用户名显示等
-                    }
-                });
-            });
+//            //login
+//            $('#loginSubmitButon').click(function login(){
+//
+//                var userName = $('#username').val();
+//                var password = $('#password').val();
+//                var loginData = {"userName":userName, "password":password}
+//                if(userName.length < 6 || password.length < 6){
+//                    alert("请输入有效的用户名密码！");
+//                    return;
+//                }
+//
+//                if(userName == "KarenKim" && password == "111111") {
+//                    $("#userIdFromServer").val("12");
+//                    $("#signin_id").hide();
+////                    $("#signout_id").show();
+////                    $("#signin_username_id").val(userName);
+////                    $("#signin_username_id").show();
+//                    $('#loginRegisterModal').modal('hide');
+//                    $("#userMenu").val() = userName;
+//                 }
+////                $.ajax({
+////                    url : '',
+////                    async : false,
+////                    type : "GET",
+////                    data : loginData,
+////                    datatype : "json",
+////                    success : function (data){
+////                       if(data.success == 1){
+////                            //TODO sign in label 去掉，添加用户名显示在页面
+////                            $('#loginRegisterModal').modal('hide');
+////
+////                            // TODO 刷新页面，获取最新的 活动 和 通知 列表
+////
+////
+////                       }else {
+////                           //TODO 通知用户 用户名密码错误
+////                       }
+////                    }
+////                });
+//            });
 
             //Active hot activity slide
             $('#carousel-example').carousel({
