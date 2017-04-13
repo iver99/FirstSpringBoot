@@ -7,6 +7,7 @@ import com.iver99.persist.api.ActivityDao;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +47,16 @@ public class ActivityAPI {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Object getAllActivities() {
+    public Object getAllActivities(String searchString) {
         LOGGER.info("Service to call GET all activities...");
-        List<Activity> activities = activityDao.findAll();
+        List<Activity> activities = null;
+        if(searchString !=null && !StringUtils.isEmpty(searchString)){
+            LOGGER.info("searching for "+searchString);
+            activities = activityDao.search("%"+searchString+"%","%"+searchString+"%");
+        }else{
+            LOGGER.info("Get all activities");
+            activities = activityDao.findAll();
+        }
         ActivityBean activityBean = null;
         List<ActivityBean> activityBeanList = new ArrayList<>();
         if (activities != null && !activities.isEmpty()) {
