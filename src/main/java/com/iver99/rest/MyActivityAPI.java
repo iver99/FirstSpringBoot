@@ -73,10 +73,18 @@ public class MyActivityAPI {
     }
 
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public Object deleteMyActivity(@PathVariable Long id){
+    @RequestMapping(method = RequestMethod.DELETE)
+    public Object deleteMyActivity(Long userId,Long activityId){
         LOGGER.info("Service to call DELETE my activity");
-        myActivityDao.delete(id);
+        List<MyActivity> myActivity = myActivityDao.getByUserIdAndActivityId(userId,activityId);
+        Long myActivityId = null;
+        if(myActivity!=null && !myActivity.isEmpty()){
+            MyActivity myActivity1 = myActivity.get(0);
+            myActivityId = myActivity1.getId();
+        }
+        if(myActivityId !=null){
+            myActivityDao.delete(myActivityId);
+        }
         return new MsgModel(null,"delete my activity succcess", true);
 
     }

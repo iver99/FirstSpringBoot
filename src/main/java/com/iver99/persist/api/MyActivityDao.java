@@ -12,4 +12,7 @@ import java.util.List;
 public interface MyActivityDao extends JpaRepository<MyActivity, Long> {
     @Query("select t from MyActivity t where t.user_id = ?1")
     public List<MyActivity> getActivitiesByUserId(Long userId);
+
+    @Query("select t from MyActivity t where t.user_id = ?1 and t.activity_id=?2")
+    public List<MyActivity> getByUserIdAndActivityId(Long userId,Long activityId);
 }
