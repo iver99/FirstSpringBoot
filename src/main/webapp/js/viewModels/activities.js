@@ -39,9 +39,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                     datatype: "json",
                     success: function (data) {
                         for (var i = 0; i < data.object.length; i++) {
-                            if(data.object[i].status == 1){
+//                            if(data.object[i].status == 1){
                                 currentActivityArray.push(data.object[i]);
-                            }
+//                            }
                         }
 
                     }
@@ -95,9 +95,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 self.subscribeActivity = function (item) {
                     //活动订阅
                     $.ajax({
-                        url: '/v1/mySubscribe',
+                        url: '/v1/subscribe?userId=1&activityId='+item.id,
                         async: false,
-                        type : "POST",
+                        type : "PUT",
                         data : {"userId": 1, "activityId": item.id},
                         datatype: "json",
                         success: function (data) {
@@ -111,6 +111,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
 
                         }
                     });
+                }
+
+                // 搜索框搜索活动
+                self.searchActivity = function () {
+                    var searchString = f
+
                 }
 
 

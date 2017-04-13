@@ -37,7 +37,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 var currentSubscribeActivityArray = new Array();
 
                 $.ajax({
-                    url: '/v1/mySubscribe/1',
+                    url: '/v1/myActivity/1?isSubscribed=1',
                     async: false,
                     type : "GET",
 //                    data : {"user_id": 1}
@@ -63,9 +63,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable', 'oj
                 self.unSubscribeActivity = function (item) {
                     //取消活动订阅
                     $.ajax({
-                        url: '/v1/mySubscribe?activityId='+item.id+'&userId=1',
+                        url: '/v1/unsubscribe?userId=1&activityId='+item.id,
                         async: false,
-                        type : "DELETE",
+                        type : "PUT",
                         data : {"user_id": 1, "activity_id":item.id},
                         datatype: "json",
                         success: function (data) {
