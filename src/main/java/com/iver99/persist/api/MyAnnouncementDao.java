@@ -14,4 +14,7 @@ public interface MyAnnouncementDao  extends JpaRepository<MyAnnouncement, Long> 
 
     @Query("select t from MyAnnouncement t where t.user_id=?1")
     public List<MyAnnouncement>  getMyAnnoucementByUserId(Long userId);
+
+    @Query("select t from MyAnnouncement t where t.user_id=?1 and t.announcement_id=?2")
+    public List<MyAnnouncement> getMyAnnouncementByUserIdAndAnnoucementId(Long announcementId, Long userId);
 }

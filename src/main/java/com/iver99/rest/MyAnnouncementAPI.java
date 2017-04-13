@@ -56,11 +56,23 @@ public class MyAnnouncementAPI {
 
     }
 
-    @RequestMapping(value = "{annoucementId}", method = RequestMethod.DELETE)
-    public Object deleteMyAnno(@PathVariable Long annoucementId){
-        LOGGER.info("Service to call delete usre announment success");
-        myAnnouncementDao.delete(annoucementId);
-        return new MsgModel(null,"delete announcement success", true);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public Object deleteMyAnno(Long announcementId, Long userId){
+        LOGGER.info("Service to call delete usre announment success "+announcementId + " "+userId);
+        List<MyAnnouncement> myAnnouncement = myAnnouncementDao.getMyAnnouncementByUserIdAndAnnoucementId(announcementId,userId);
+        LOGGER.info("Retrieved my announcement size is "+myAnnouncement.size());
+        Long myAnnouncementId = null;
+        if(myAnnouncement!=null && !myAnnouncement.isEmpty()){
+            myAnnouncementId = myAnnouncement.get(0).getId();
+        }
+        if(myAnnouncementId!=null){
+            LOGGER.info("announcement id is "+myAnnouncementId);
+            myAnnouncementDao.delete(myAnnouncementId);
+            return new MsgModel(null,"delete announcement success", true);
+        }
+        LOGGER.info("announcement id is null!");
+        return new MsgModel(null,"delete announcement fail", false);
+//        myAnnouncementDao.delete(annoucementId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
