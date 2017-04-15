@@ -1,0 +1,444 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+
+.padding-btm {
+    padding-bottom: 1em;
+}
+
+.application-name {
+    font-size: 1.5em;
+    font-weight: 450;
+}
+
+.activities-heading,
+.hot-activities-heading,
+.announcement-heading,
+.feedback-heading {
+    padding: 10px;
+    background: rgb(61, 157, 179);
+    margin-bottom: 1em;
+}
+
+.hot-activities-heading h3,
+.activities-heading h3,
+.announcement-heading h3,
+.feedback-heading h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.5em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    position: relative;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.feedbacks-block {
+    margin-top: 2em;
+}
+
+.published-activityies-block {
+    margin-top: 2em;
+}
+
+.customer-header {
+    background-color: #f0f0f0;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    border-bottom: 2px solid #0572ce;
+}
+
+.slide-bdr {
+    border: 1px solid rgb(61, 157, 179);
+}
+
+.activity-tab-title {
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+@media(max-width:320px) {
+    .activity-tab-title {
+        font-size: 1em;
+    }
+}
+
+@media(max-width:800px) {
+    .activity-tab-title {
+        font-size: 1.2em;
+    }
+}
+
+@media(max-width:414px) {
+    .activity-tab-title {
+        font-size: 1em;
+    }
+}
+
+.activities-container ul {
+    padding-left: -5px;
+    padding-right: 0px;
+}
+
+.activities-container ul li {
+    /*    margin-top: 0.5em;*/
+    /*    border-bottom: 1px solid #eeeeee;*/
+}
+
+.current-activit-title {
+    padding-bottom: 0.5em;
+}
+
+.current-activit-title a {
+    color: #0b969d;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.current-activit-title a:hover {
+    color: #115b6b;
+}
+
+.current-activit-title a:focus {
+    outline: none;
+}
+
+.over-activity-title {
+    padding-bottom: 0.5em;
+}
+
+.over-activity-title a {
+    color: #4fa5b8;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.over-activity-title a:hover {
+    color: #115b6b;
+}
+
+.over-activity-title a:focus {
+    outline: none;
+}
+
+.date-grid {
+    color: #383838;
+    font-size: .9em;
+}
+
+.activity-description a {
+    font-size: 1em;
+    color: #999999;
+    line-height: 1.5em;
+    text-decoration: none;
+}
+
+.activity-description a:hover {
+    color: #115b6b;
+}
+
+.activity-description a:focus {
+    outline: none;
+}
+
+.activity-description-text-overflow {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.submit-button,
+.save-button {
+    background-color: #2cc8e1;
+}
+
+.enroll-button {
+    display: inline-block;
+    font-weight: bold;
+    background: rgb(247, 248, 241);
+    padding: 2px 6px;
+    color: rgb(29, 162, 193);
+    margin-left: 10px;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid rgb(203, 213, 214);
+    -webkit-transition: all 0.4s linear;
+    -moz-transition: all 0.4s linear;
+    -o-transition: all 0.4s linear;
+    -ms-transition: all 0.4s linear;
+    transition: all 0.4s linear;
+}
+
+.enroll-button:hover {
+    color: rgb(57, 191, 215);
+    background: rgb(247, 247, 247);
+    border: 1px solid rgb(74, 179, 198);
+}
+
+.enroll-button:active {
+    position: relative;
+    top: 1px;
+}
+
+.common-button {
+    width: 40px;
+    height: 30px;
+    margin-right: -20px;
+    padding-left: -5px;
+    padding-right: -5px;
+    font-size: 0.9em;
+}
+
+.enroll-subscribe-button {
+    margin-left: 100px;
+    margin-top: -7px;
+}
+
+
+/**
+* Announcement list style
+*/
+
+.announcement-container {
+    border: 1px solid rgb(61, 157, 179);
+    background-color: white;
+}
+
+.announcement-container ul {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.announcement-container ul li {
+    margin-top: 1em;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.announcement-title a {
+    margin-left: 0.5em;
+    color: red;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.announcement-title a:hover {
+    color: #115b6b;
+}
+
+.announcement-title a:focus {
+    outline: none;
+}
+
+.announcement-time {
+    font-size: 1em;
+    color: #999999;
+    float: right;
+    margin-right: 1em;
+}
+
+.announcement-info p {
+    margin-top: 5px;
+    margin-left: 30px;
+    color: #383838;
+    font-size: 1em;
+    line-height: 1.3em;
+    text-decoration: none;
+}
+
+.feedback-title a {
+    margin-left: 0.5em;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.feedback-title a:hover {
+    color: #115b6b;
+}
+
+.feedback-title a:focus {
+    outline: none;
+}
+
+.feedback-user-time {
+    font-size: 1em;
+    color: #999999;
+    font-style: italic;
+    margin-left: 1em;
+    float: right;
+}
+
+@media screen and (min-width:1200px) {
+    .admin-login {
+        position: relative;
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1199px) {
+    .admin-login {
+        position: relative;
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 959px) {
+    .application-name {
+        font-size: 1.3em;
+    }
+    .hot-activities-heading h3,
+    .activities-heading h3,
+    .announcement-heading h3,
+    .feedback-heading h3 {
+        font-size: 1.2em;
+    }
+    .activities-heading,
+    .hot-activities-heading,
+    .announcement-heading,
+    .feedback-heading {
+        margin-bottom: 0.5em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+    .feedbacks-block {
+        margin-top: 1.2em;
+    }
+    .published-activityies-block {
+        margin-top: 1.2em;
+    }
+    .admin-login {
+        position: relative;
+        width: 90%;
+    }
+}
+
+
+/*
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+}
+*/
+
+@media only screen and (max-width: 479px) {
+    .application-name {
+        font-size: 1.2em;
+    }
+    .hot-activities-heading h3,
+    .activities-heading h3,
+    .announcement-heading h3,
+    .contact-heading h3 {
+        font-size: 1em;
+    }
+    .activities-heading,
+    .hot-activities-heading,
+    .announcement-heading,
+    .contact-heading {
+        margin-bottom: 0.5em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+    .feedbacks-block {
+        margin-top: 1em;
+    }
+    .published-activityies-block {
+        margin-top: 1em;
+    }
+    .admin-login {
+        position: relative;
+        width: 90%;
+    }
+}
+
+
+/*
+@media(max-width:991px) {
+    .application-name {
+        font-size: 1.3em;
+    }
+    .hot-activities-heading h3,
+    .activities-heading h3,
+    .announcement-heading h3,
+    .feedback-heading h3 {
+        font-size: 1.2em;
+    }
+    .activities-heading,
+    .hot-activities-heading,
+    .announcement-heading,
+    .feedback-heading {
+        margin-bottom: 0.5em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+    .feedbacks-block {
+        margin-top: 1.2em;
+    }
+    .published-activityies-block {
+        margin-top: 1.2em;
+    }
+    .admin-login {
+        position: relative;
+        width: 80%;
+    }
+}
+*/
+
+
+/**
+* Contact Us view style
+*/
+
+.contact-form-container {
+    border: 1px solid rgb(61, 157, 179);
+    background-color: white;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+.form-column-header {
+    font-size: 1.1em;
+    margin-bottom: 0.3em;
+    font-weight: 600;
+    color: black;
+}
+
+.bottom-edit-button {
+    position: relative;
+    margin-right: 1em;
+    margin-top: 5px;
+}
+
+.admin-login {
+    position: relative;
+    width: 90%;
+}
+
+.admin-login form {
+    position: relative;
+}

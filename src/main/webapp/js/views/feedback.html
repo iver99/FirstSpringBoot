@@ -1,0 +1,128 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <div class="feedback-heading">
+        <h3>Feedback</h3>
+    </div>
+    <form id="contactUsForm" class="contact-form-container">
+        <div class="oj-form-layout" id="contact-form-container">
+            <div class="oj-form">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item">
+                                    <label class="form-column-header" for="contactName">Enter Name</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="contactName" rows="1" data-bind="ojComponent: {component: 'ojTextArea',
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item">
+                                    <label class="form-column-header" for="contactEmail">Enter Email</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="contactEmail" rows="1" data-bind="ojComponent: {component: 'ojTextArea',
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <div class="oj-form">
+                            <div class="oj-flex oj-sm-flex-direction-column">
+                                <div class="oj-flex-item ">
+                                    <label class="form-column-header" for="control2">Feedback</label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <textarea id="control2" rows="6" data-bind="ojComponent: {component: 'ojTextArea', 
+                                                 rootAttributes: {
+                                                     style:'max-width: 100%'
+                                                 }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="contactForRoleForm">
+                <label class="form-column-header" id="mainlabelid">Who can see</label>
+                <div id="contactForRoleCheckboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', 
+             invalidComponentTracker: tracker,
+             required: true, value: currentRole}">
+                    <span class="oj-choice-item">
+            <input id="userOpt" type="checkbox" value="webmaster">
+            <label for="userOpt">User</label>
+        </span>
+                    <span class="oj-choice-item">
+            <input id="adminOpt" type="checkbox" value="admin">
+            <label for="adminOpt">Admin</label>
+        </span>
+                    <span class="oj-choice-item">
+            <input id="developerOpt" type="checkbox" value="developer">
+            <label for="developerOpt">Developer</label>
+        </span>
+                </div>
+                <div id='buttons-container'>
+                    <input id="clearRoleButton" type="button" data-bind=" 
+                click: clearRolesOption,
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Clear option'}" />
+                    <input id="valideRoleButton" type="button" data-bind=" 
+                click: validateContactRoleOption,
+                ojComponent: {
+                  component: 'ojButton', 
+                  label: 'Validate'}" /><br/>
+                </div>
+
+            </div>
+            <div>
+                <input id="contactMessageSubmitButton" type="submit" class="submit-button" data-bind="click: contactMessageSubmit, 
+                      ojComponent: {component: 'ojButton', label: 'Submit'}" /></div>
+        </div>
+
+    </form>
+    <div class="feedbacks-block">
+        <div class="feedback-heading">
+            <h3>Feedbacks</h3>
+        </div>
+
+        <div class="announcement-container" style="position: relative;">
+            <ul style='list-style-type:none' data-bind="foreach: feedbackItems">
+                <li class="selectable selected padding-btm" data-bind="attr: { id: id }">
+                    <div class="oj-flex">
+                        <div class="feedback-title oj-flex-item ">
+                            <span title="Announcement" role="img" class="demo-chat-icon-24 demo-icon-font"></span>
+                            <a type="button" href="#" data-bind="text: title, attr: {title: title}"></a>
+                        </div>
+                        <div class="feedback-user-time">
+                            <span class="" data-bind="text: 'By: '+ user_email + ' ,'"></span>
+                        </div>
+                        <div class="feedback-user-time">
+                            <span class="" data-bind="text: created_at"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:feedbackDataSource, pageSize:10}"></div>
+        </div>
+    </div>
+</div>

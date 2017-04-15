@@ -24,22 +24,58 @@ import javax.persistence.EntityNotFoundException;
 @RequestMapping("/test")
 public class TestAPI {
 
-    private final Logger logger= LoggerFactory.getLogger(TestAPI.class);
+    private final Logger logger = LoggerFactory.getLogger(TestAPI.class);
     @Autowired
     private TestDao testDao;
+
+    @RequestMapping(value = "activities", method = RequestMethod.GET)
+    public Object getActivityList() {
+
+
+        String result = "                [\n" +
+                "                        {\n" +
+                "                        \"id\": \"001\",\n" +
+                "                        \"title\": \"This is an long long long long activity title xxxxxxx\",\n" +
+                "                        \"publisher\": \"Admin\",\n" +
+                "                        \"status\": \"1\",\n" +
+                "                        \"created_at\": \"2017-04-01\",\n" +
+                "                        \"description\": \"This is activity description, contains all details information. Please click the activity title to see more detail, also you can click the right button to enroll.\",\n" +
+                "                        \"start_time\": \"04/08/17 01:00 PM\",\n" +
+                "                        \"end_time\": \"04/08/17 03:00 PM\",\n" +
+                "                        \"activity_place\": \"Beijing\"\n" +
+                "                        }]";
+
+
+
+        return result;
+
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public Object register(String userName, String email, String password) {
+        String result = "\"userName\"" + userName + ", \"email\":" + email + ", \"password\":" + password ;
+        return result;
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public Object login(String userName,String password) {
+        String result = "\"userName\"" + userName + ", \"password\":" + password ;
+        return result;
+    }
+
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Object get(@PathVariable Long id) {
 
-        logger.info("Service to Call [GET] test for id {}",id);
-        try{
+        logger.info("Service to Call [GET] test for id {}", id);
+        try {
             Test t = testDao.getOne(id);
             if (t != null) {
                 TestBean bean = new TestBean();
                 BeanUtils.copyProperties(t, bean);
                 return bean;
             }
-        }catch(EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             e.printStackTrace();
         }
         return ResponseEntity.notFound();
@@ -47,11 +83,11 @@ public class TestAPI {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Object create(TestBean bean){
+    public Object create(TestBean bean) {
         logger.info("Service to Call [POST] test");
-        if(bean!=null){
-            Test t=new Test();
-            BeanUtils.copyProperties(bean,t);
+        if (bean != null) {
+            Test t = new Test();
+            BeanUtils.copyProperties(bean, t);
             testDao.save(t);
             return ResponseEntity.ok(t);
         }
@@ -59,38 +95,38 @@ public class TestAPI {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public Object update(TestBean bean){
+    public Object update(TestBean bean) {
         logger.info("Service to Call [PUT] test");
         try {
-            if(bean!=null){
-                Long id=bean.getId();
-                if(id==null){
+            if (bean != null) {
+                Long id = bean.getId();
+                if (id == null) {
                     throw new Exception("Id cannot be null!");
                 }
-                Test t= testDao.getOne(id);
-                if(t==null){
-                    throw new Exception("Specific Test Entity is not found for id "+id);
+                Test t = testDao.getOne(id);
+                if (t == null) {
+                    throw new Exception("Specific Test Entity is not found for id " + id);
                 }
-                if(bean.getAddress()!=null){
+                if (bean.getAddress() != null) {
                     t.setAddress(bean.getAddress());
                 }
-                if(bean.getName()!=null){
+                if (bean.getName() != null) {
                     t.setName(bean.getName());
                 }
                 return ResponseEntity.ok(testDao.save(t));
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ResponseEntity.unprocessableEntity();
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public Object delete(@PathVariable Long id){
-        logger.info("Service to Call [DELETE] test for id {}",id);
-        try{
-            if(id==null){
+    public Object delete(@PathVariable Long id) {
+        logger.info("Service to Call [DELETE] test for id {}", id);
+        try {
+            if (id == null) {
                 throw new Exception("Id cannot be null!");
             }
             testDao.delete(id);

@@ -1,0 +1,30 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <div class="announcement-heading">
+        <h3>Announcement List</h3>
+    </div>
+    <div class="activities-container" style="position: relative;">
+        <ul style='list-style-type:none' data-bind="foreach: announcementItems">
+            <li class="selectable selected" data-bind="attr: { id: id }">
+                <div class="oj-flex">
+                    <div class="announcement-title oj-flex-item">
+                        <span title="Announcement" role="img" class="oj-fwk-icon-status-info oj-fwk-icon"></span>
+                        <a type="button" href="#" data-bind="text: title, attr: {title: title}"></a>
+                    </div>
+                    <div class=" announcement-time">
+                        <span title=".oj-fwk-icon-calendar-clock" role="img"
+                class="oj-fwk-icon-calendar-clock oj-fwk-icon"></span>
+                        <span class="" data-bind="text: $parent.renderTime(create_time)"></span>
+                    </div>
+                </div>
+                <div class="announcement-info activity-description-text-overflow">
+                    <p data-bind="text: description"></p>
+                </div>
+            </li>
+        </ul>
+        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data:announcementDataSource, pageSize:10}"></div>
+    </div>
+</div>
